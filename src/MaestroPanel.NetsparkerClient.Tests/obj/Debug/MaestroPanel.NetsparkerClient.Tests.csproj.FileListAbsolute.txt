@@ -1,0 +1,12 @@
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.dll.config
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Moq.Contrib.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Moq.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.xml

@@ -1,0 +1,6 @@
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\bin\Debug\MaestroPanel.NetsparkerClient.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\bin\Debug\MaestroPanel.NetsparkerClient.pdb
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.xml
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.dll
+c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.pdb
