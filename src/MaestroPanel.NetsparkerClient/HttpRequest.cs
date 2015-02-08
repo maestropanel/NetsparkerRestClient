@@ -40,7 +40,7 @@ namespace MaestroPanel.NetsparkerClient
 
         public IHttpRequest CreateRequest(string path)
         {
-            _url = Path.Combine(_url, path);
+            _url = UrlTools.Combine(_url, path);
 
             return this;
         }

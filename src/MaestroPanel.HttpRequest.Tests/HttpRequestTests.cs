@@ -16,7 +16,9 @@ namespace MaestroPanel.HttpRequest.Tests
         {
             IHttpRequest req = new MaestroPanel.NetsparkerClient.HttpRequest("http://foo.com");
 
-            Assert.AreEqual(req.Url, "http://foo.com");
+            req.CreateRequest("/api");
+
+            Assert.AreEqual(req.Url, "http://foo.com/api");
         }
 
         [TestMethod]
