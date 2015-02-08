@@ -46,7 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiResource.cs" />
-    <Compile Include="Model\PagebleResult.cs" />
+    <Compile Include="Model\PagedListApiResult.cs" />
+    <Compile Include="Model\Scan.cs" />
+    <Compile Include="Model\ScanPolicy.cs" />
     <Compile Include="Model\WebsiteGroup.cs" />
     <Compile Include="NetsparkerRestApi.cs" />
     <Compile Include="Model\Website.cs" />

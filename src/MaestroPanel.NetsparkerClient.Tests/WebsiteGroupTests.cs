@@ -16,7 +16,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
         {
             var _client = new NetsparkerClient(new NetsparkerRestApi("https://www.netsparkercloud.com/api/1.0", "2ePd24tUZFgX2pladg7ZshHc0jNdM8jd4XOY70d8GnM="));
 
-            var result = _client.WebsiteGroupList();
+            var result = _client.WebSiteGroup()
+                                .List();
         }
 
         [TestMethod]
@@ -24,9 +25,10 @@ namespace MaestroPanel.NetsparkerClient.Tests
         {
             var _client = new NetsparkerClient(new NetsparkerRestApi("https://www.netsparkercloud.com/api/1.0", "2ePd24tUZFgX2pladg7ZshHc0jNdM8jd4XOY70d8GnM="));
 
-            var result = _client.WebsiteGroupAdd(new WebsiteGroup 
+            var result = _client.WebSiteGroup()
+                                .New(new NewWebsiteGroupApiModel
             {
-
+                Name = "Public"
             });
         }
     }

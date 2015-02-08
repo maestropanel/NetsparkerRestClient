@@ -10,3 +10,15 @@ c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\Ma
 c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Moq.dll
 c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.dll
 c:\users\administrator\documents\visual studio 2012\Projects\NetsparketClient\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.dll.config
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.Tests.pdb
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Moq.Contrib.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Moq.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\MaestroPanel.NetsparkerClient.pdb
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.dll
+C:\Users\Administrator\Documents\GitHub\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient.Tests\obj\Debug\MaestroPanel.NetsparkerClient.Tests.pdb

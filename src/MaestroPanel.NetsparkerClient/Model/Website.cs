@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaestroPanel.NetsparkerClient.Model
 {
-    public class WebsiteNewOrUpdate
+    public class NewWebsiteApiModel
     {
         public string Name { get; set; }
         public string RootUrl { get; set; }
@@ -16,7 +16,17 @@ namespace MaestroPanel.NetsparkerClient.Model
         public ClientCertificateAuthentication ClientCertificateAuthentication { get; set; }
     }
 
-    public class Website
+    public class UpdateWebsiteApiModel
+    {
+        public string Name { get; set; }
+        public string RootUrl { get; set; }
+        public List<string> Groups { get; set; }
+        public BasicAuthentication BasicAuthentication { get; set; }
+        public FormAuthentication FormAuthentication { get; set; }
+        public ClientCertificateAuthentication ClientCertificateAuthentication { get; set; }
+    }
+
+    public class WebsiteApiModel
     {
         public Guid Id { get; set; }
         public string RootUrl { get; set; }
@@ -26,6 +36,32 @@ namespace MaestroPanel.NetsparkerClient.Model
         public BasicAuthentication BasicAuthentication { get; set; }
         public FormAuthentication FormAuthentication { get; set; }
         public ClientCertificateAuthentication ClientCertificateAuthentication { get; set; }
+    }
+
+    public class DeleteWebsiteApiModel
+    {
+        public string RootUrl { get; set; }
+    }
+
+    public class VerifyApiModel
+    {
+        public VerificationMethod VerificationMethod { get; set; }
+        public string VerificationSecret { get; set; }
+        public string WebsiteUrl { get; set; }
+    }
+
+    public enum VerificationMethod
+    {
+        File,
+        Tag,
+        Dns,
+        Email,
+    }
+
+    public class StartVerificationApiModel
+    {
+        public VerificationMethod VerificationMethod { get; set; }
+        public string WebsiteUrl { get; set; }
     }
 
     public abstract class Authentication
@@ -58,5 +94,19 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         public string Username { get; set; }
         public bool IsDefault { get; set; }
+    }
+
+    public enum VerifyOwnershipResult
+    {
+        Verified,
+        NotVerified,
+        VerificationLimitExceed
+    }
+
+    public enum DeleteWebsiteResult
+    {
+        Ok,
+        NotFound,
+        OnGoingScanExisting
     }
 }

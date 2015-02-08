@@ -14,14 +14,14 @@ namespace MaestroPanel.NetsparkerClient.Tests
         public void website_should_be_one_website()
         {
             var moqApi = new Mock<INetsparkerRestApi>();
-            moqApi.Setup(x => x.Get<Page<Website>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
-                  .Returns(new ExecuteResult<Page<Website>>
+            moqApi.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
+                  .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
                   {
-                      Data = new Page<Website>
+                      Data = new PagedListApiResult<WebsiteApiModel>
                       {
-                          List = new List<Website> 
+                          List = new List<WebsiteApiModel> 
                           {
-                               new Website
+                               new WebsiteApiModel
                                {
                                     RootUrl = "http://demo.maestro.com",
                                     Name = "maestro"
@@ -33,7 +33,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             var _client = new NetsparkerClient(moqApi.Object);
 
-            var response = _client.WebsiteList();
+            var response = _client.WebSite()
+                                  .List();
 
             int expected = 1;
             int actual = response.Data.List.Count;
@@ -45,8 +46,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
         public void website_should_be_response_null()
         {
             var moqApi = new Mock<INetsparkerRestApi>();
-            moqApi.Setup(x => x.Get<Page<Website>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
-                  .Returns(new ExecuteResult<Page<Website>>
+            moqApi.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
+                  .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
                   {
                       ErrorMessage = "Unauthorized",
                       Status = HttpStatusCode.Unauthorized
@@ -54,7 +55,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             var _client = new NetsparkerClient(moqApi.Object);
 
-            var result = _client.WebsiteList();
+            var result = _client.WebSite()
+                                .List();
 
             var expected = HttpStatusCode.Unauthorized;
             var actual = result.Status;
@@ -66,10 +68,10 @@ namespace MaestroPanel.NetsparkerClient.Tests
         public void website_should_be_add()
         {
             var moqApi = new Mock<INetsparkerRestApi>();
-            moqApi.Setup(x => x.Post<Website>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.NEW)))
-                  .Returns(new ExecuteResult<Website>
+            moqApi.Setup(x => x.Post<WebsiteApiModel>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.NEW)))
+                  .Returns(new ExecuteResult<WebsiteApiModel>
                   {
-                      Data = new Website
+                      Data = new WebsiteApiModel
                       {
                           Id = Guid.NewGuid(),
                           Name = "demo.maestrodemo.com",
@@ -81,7 +83,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             var _client = new NetsparkerClient(moqApi.Object);
 
-            var result = _client.WebSiteAdd(new WebsiteNewOrUpdate
+            var result = _client.WebSite()
+                                .New(new NewWebsiteApiModel
             {
                 Name = "demo.maestrodemo.com",
                 RootUrl = "http://demo.maestrodemo.com/",
@@ -95,10 +98,10 @@ namespace MaestroPanel.NetsparkerClient.Tests
         public void website_should_be_update()
         {
             var moqApi = new Mock<INetsparkerRestApi>();
-            moqApi.Setup(x => x.Post<Website>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.UPDATE)))
-                  .Returns(new ExecuteResult<Website>
+            moqApi.Setup(x => x.Post<WebsiteApiModel>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.UPDATE)))
+                  .Returns(new ExecuteResult<WebsiteApiModel>
                   {
-                      Data = new Website
+                      Data = new WebsiteApiModel
                       {
                           Id = Guid.Parse("e0e0d0fa-20f5-4760-a3bc-e1adb9146af8"),
                           Name = "demo.maestrodemo.com",
@@ -110,7 +113,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             var _client = new NetsparkerClient(moqApi.Object);
 
-            var result = _client.WebSiteUpdate(new WebsiteNewOrUpdate
+            var result = _client.WebSite()
+                                .Update(new UpdateWebsiteApiModel
             {
                 Name = "demo.maestrodemo.com",
                 RootUrl = "http://demo.maestrodemo.com/",
@@ -137,7 +141,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             var _client = new NetsparkerClient(moqApi.Object);
 
-            var result = _client.WebSiteDelete("http://demo.maestrodemo.com/");
+            var result = _client.WebSite()
+                                .Delete(new DeleteWebsiteApiModel { RootUrl = "http://demo.maestrodemo.com/" });
 
             string expected = "Ok";
             string actual = "Ok";

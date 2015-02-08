@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MaestroPanel.NetsparkerClient.Model
 {
-    public class Page<T>
+    public class PagedListApiResult<T>
     {
-        public Page()
+        public PagedListApiResult()
         {
             List = new List<T>();
         }
