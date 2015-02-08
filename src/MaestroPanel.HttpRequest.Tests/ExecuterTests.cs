@@ -45,9 +45,9 @@ namespace MaestroPanel.HttpRequest.Tests
 
             var result = executer.Get<TestObject>();
 
-            bool expected = result.Status == HttpStatusCode.Unauthorized && result.ErrorMessage == "foo";
+            bool actual = result.Status == HttpStatusCode.Unauthorized && result.ErrorMessage == "foo";
 
-            Assert.IsTrue(expected);
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]
@@ -64,9 +64,9 @@ namespace MaestroPanel.HttpRequest.Tests
 
             var result = executer.Get<TestObject>();
 
-            bool expected = result.ErrorMessage == "bar";
+            bool actual = result.ErrorMessage == "bar";
 
-            Assert.IsTrue(expected);
+            Assert.IsTrue(actual);
         }
 
         [TestMethod]

@@ -11,143 +11,177 @@ namespace MaestroPanel.NetsparkerClient.Tests
     public class WebsiteTests
     {
         [TestMethod]
-        public void website_should_be_one_website()
+        public void website_should_be_list_website()
         {
-            //var moqApi = new Mock<INetsparkerRestApi>();
-            //moqApi.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
-            //      .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
-            //      {
-            //          Data = new PagedListApiResult<WebsiteApiModel>
-            //          {
-            //              List = new List<WebsiteApiModel> 
-            //              {
-            //                   new WebsiteApiModel
-            //                   {
-            //                        RootUrl = "http://demo.maestro.com",
-            //                        Name = "maestro"
-            //                   }
-            //              }
-            //          },
-            //          Status = HttpStatusCode.OK
-            //      });
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var _client = new NetsparkerClient(moqApi.Object);
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>())
+                        .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = new PagedListApiResult<WebsiteApiModel>
+                            {
+                                List = new List<WebsiteApiModel> 
+                                {
+                                     new WebsiteApiModel { Name="foo.com" },
+                                     new WebsiteApiModel { Name="bar.com" },
+                                }
+                            }
+                        });
 
-            //var response = _client.WebSite()
-            //                      .List();
 
-            //int expected = 1;
-            //int actual = response.Data.List.Count;
+            mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            //Assert.AreEqual(expected, actual);
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var webSiteList = netsparkerClient.WebSite()
+                                              .List();
+
+            int expected = 2;
+            int actual = webSiteList.Data.List.Count;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void website_should_be_response_null()
+        public void website_should_be_list_response_unauthorized()
         {
-            //var moqApi = new Mock<INetsparkerRestApi>();
-            //moqApi.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.LIST)))
-            //      .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
-            //      {
-            //          ErrorMessage = "Unauthorized",
-            //          Status = HttpStatusCode.Unauthorized
-            //      });
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var _client = new NetsparkerClient(moqApi.Object);
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Get<PagedListApiResult<WebsiteApiModel>>())
+                        .Returns(new ExecuteResult<PagedListApiResult<WebsiteApiModel>>
+                        {
+                            Status = HttpStatusCode.Unauthorized
+                        });
 
-            //var result = _client.WebSite()
-            //                    .List();
 
-            //var expected = HttpStatusCode.Unauthorized;
-            //var actual = result.Status;
+            mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            //Assert.AreEqual(expected, actual);
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var webSiteList = netsparkerClient.WebSite()
+                                              .List();
+
+            HttpStatusCode expected = HttpStatusCode.Unauthorized;
+            HttpStatusCode actual = webSiteList.Status;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void website_should_be_add()
+        public void website_should_be_add_new_website()
         {
-            //var moqApi = new Mock<INetsparkerRestApi>();
-            //moqApi.Setup(x => x.Post<WebsiteApiModel>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.NEW)))
-            //      .Returns(new ExecuteResult<WebsiteApiModel>
-            //      {
-            //          Data = new WebsiteApiModel
-            //          {
-            //              Id = Guid.NewGuid(),
-            //              Name = "demo.maestrodemo.com",
-            //              RootUrl = "http://demo.maestrodemo.com/",
-            //              Groups = new List<string> { "Default" }
-            //          },
-            //          Status = HttpStatusCode.OK
-            //      });
+            var testModel = new NewWebsiteApiModel
+            {
+                Name = "bar.com",
+                RootUrl = "http://bar.com"
+            };
 
-            //var _client = new NetsparkerClient(moqApi.Object);
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var result = _client.WebSite()
-            //                    .New(new NewWebsiteApiModel
-            //{
-            //    Name = "demo.maestrodemo.com",
-            //    RootUrl = "http://demo.maestrodemo.com/",
-            //    Groups = new List<string> { "Default" }
-            //});
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<WebsiteApiModel>(testModel))
+                        .Returns(new ExecuteResult<WebsiteApiModel>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = new WebsiteApiModel
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = testModel.Name,
+                                RootUrl = testModel.RootUrl
+                            }
+                        });
 
-            //Assert.AreNotEqual(Guid.Empty, result.Data.Id);
+
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.NEW)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                              .New(testModel);
+
+            Guid notExpected = Guid.Empty;
+            Guid actual = result.Data.Id;
+
+            Assert.AreNotEqual(notExpected, actual);
         }
 
         [TestMethod]
-        public void website_should_be_update()
+        public void website_should_be_update_website()
         {
-            //var moqApi = new Mock<INetsparkerRestApi>();
-            //moqApi.Setup(x => x.Post<WebsiteApiModel>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.UPDATE)))
-            //      .Returns(new ExecuteResult<WebsiteApiModel>
-            //      {
-            //          Data = new WebsiteApiModel
-            //          {
-            //              Id = Guid.Parse("e0e0d0fa-20f5-4760-a3bc-e1adb9146af8"),
-            //              Name = "demo.maestrodemo.com",
-            //              RootUrl = "http://demo.maestrodemo.com/",
-            //              Groups = new List<string> { "Default" }
-            //          },
-            //          Status = HttpStatusCode.OK
-            //      });
+            var testModel = new UpdateWebsiteApiModel
+            {
+                Name = "bar.com",
+                RootUrl = "http://bar.com"
+            };
 
-            //var _client = new NetsparkerClient(moqApi.Object);
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var result = _client.WebSite()
-            //                    .Update(new UpdateWebsiteApiModel
-            //{
-            //    Name = "demo.maestrodemo.com",
-            //    RootUrl = "http://demo.maestrodemo.com/",
-            //    Groups = new List<string> { "Default" }
-            //});
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<WebsiteApiModel>(testModel))
+                        .Returns(new ExecuteResult<WebsiteApiModel>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = new WebsiteApiModel
+                            {
+                                Id = new Guid("faf48dcc-93fd-4b44-93e9-a2ff7de497c0"),
+                                Name = testModel.Name,
+                                RootUrl = testModel.RootUrl
+                            }
+                        });
 
-            //Guid expected = Guid.Parse("e0e0d0fa-20f5-4760-a3bc-e1adb9146af8");
-            //Guid actual = result.Data.Id;
 
-            //Assert.AreEqual(expected, actual);
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.UPDATE)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .Update(testModel);
+
+            Guid expected = new Guid("faf48dcc-93fd-4b44-93e9-a2ff7de497c0");
+            Guid actual = result.Data.Id;
+
+            Assert.AreEqual(expected, actual);
 
         }
 
         [TestMethod]
-        public void website_should_be_delete()
+        public void website_should_be_delete_website()
         {
-            //var moqApi = new Mock<INetsparkerRestApi>();
-            //moqApi.Setup(x => x.Get<string>(It.IsAny<object>(), It.Is<string>(s => s == ApiResource.Website.DELETE)))
-            //      .Returns(new ExecuteResult<string>
-            //      {
-            //          Data = "Ok",
-            //          Status = HttpStatusCode.OK
-            //      });
+            var testModel = new DeleteWebsiteApiModel
+            {
+                RootUrl = "http://bar.com"
+            };
 
-            //var _client = new NetsparkerClient(moqApi.Object);
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var result = _client.WebSite()
-            //                    .Delete(new DeleteWebsiteApiModel { RootUrl = "http://demo.maestrodemo.com/" });
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<DeleteWebsiteResult>(testModel))
+                        .Returns(new ExecuteResult<DeleteWebsiteResult>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = DeleteWebsiteResult.Ok
+                        });
 
-            //string expected = "Ok";
-            //string actual = "Ok";
 
-            //Assert.AreEqual(expected, actual);
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.DELETE)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .Delete(testModel);
+
+            DeleteWebsiteResult expected = DeleteWebsiteResult.Ok;
+            DeleteWebsiteResult actual = result.Data;
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

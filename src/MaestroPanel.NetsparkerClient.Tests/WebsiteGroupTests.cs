@@ -14,48 +14,74 @@ namespace MaestroPanel.NetsparkerClient.Tests
     public class WebsiteGroupTests
     {
         [TestMethod]
-        public void websitegroup_should_be_default()
+        public void websitegroup_should_be_list()
         {
-            //var api = new NetsparkerRestApi();
+            var mockHttpRequest = new Mock<IHttpRequest>();
 
-            //var mockApi = new Mock<INetsparkerRestApi>();
-            //mockApi.Setup(x => x.Get<PagedListApiResult<WebsiteGroupApiModel>>(It.IsAny<object>(), ApiResource.WebsiteGroup.LIST))
-            //       .Returns(new ExecuteResult<PagedListApiResult<WebsiteGroupApiModel>>
-            //       {
-            //           Data = new PagedListApiResult<WebsiteGroupApiModel>
-            //           {
-            //               List = new List<WebsiteGroupApiModel> 
-            //               {
-            //                   new WebsiteGroupApiModel
-            //                   {
-            //                        Name = "Default"
-            //                   }
-            //               }
-            //           },
-            //           Status = HttpStatusCode.OK
-            //       });
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Get<PagedListApiResult<WebsiteGroupApiModel>>())
+                        .Returns(new ExecuteResult<PagedListApiResult<WebsiteGroupApiModel>>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = new PagedListApiResult<WebsiteGroupApiModel>
+                            {
+                                List = new List<WebsiteGroupApiModel> 
+                                {
+                                     new WebsiteGroupApiModel { Name="Default" },
+                                     new WebsiteGroupApiModel { Name="Public" },
+                                }
+                            }
+                        });
 
-            //var _client = new NetsparkerClient(mockApi.Object);
 
-            //var result = _client.WebSiteGroup()
-            //                    .List();
+            mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.WebsiteGroup.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            //var expected = result.Data.List.First().Name;
-            //var actual = "Default";
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
 
-            //Assert.AreEqual(expected, actual);
+            var webSiteList = netsparkerClient.WebSiteGroup()
+                                              .List();
+
+            int expected = 2;
+            int actual = webSiteList.Data.List.Count;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void websitegroup_should_be_add()
         {
-            //var _client = new NetsparkerClient(new NetsparkerRestApi("https://www.netsparkercloud.com/api/1.0", ""));
+            var testModel = new NewWebsiteGroupApiModel
+            {
+                Name = "Private"
+            };
 
-            //var result = _client.WebSiteGroup()
-            //                    .New(new NewWebsiteGroupApiModel
-            //                    {
-            //                        Name = "Public"
-            //                    });
+            var mockHttpRequest = new Mock<IHttpRequest>();
+
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<WebsiteGroupApiModel>(testModel))
+                        .Returns(new ExecuteResult<WebsiteGroupApiModel>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = new WebsiteGroupApiModel
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = testModel.Name
+                            }
+                        });
+
+
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.WebsiteGroup.NEW)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSiteGroup()
+                                         .New(testModel);
+
+            bool isTrue = result.Data.Id != Guid.Empty && result.Data.Name == testModel.Name;
+
+            Assert.IsTrue(isTrue);
         }
     }
 }
