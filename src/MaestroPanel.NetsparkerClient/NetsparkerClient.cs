@@ -53,6 +53,11 @@ namespace MaestroPanel.NetsparkerClient
 
         public ExecuteResult<PagedListApiResult<WebsiteApiModel>> List(int page = 1, int pageSize = 20)
         {
+            IHttpRequest request = new HttpRequest("https://www.netsparkercloud.com/api/1.0");
+            request.CreateRequest("/website/list");
+            request.Authenticate("asadaljkasdf567862745687a6sdf");
+
+
             return _api.Get<PagedListApiResult<WebsiteApiModel>>(new { page = page, pageSize = pageSize }, ApiResource.Website.LIST);
         }
 
