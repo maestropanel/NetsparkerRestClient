@@ -14,233 +14,296 @@ namespace MaestroPanel.NetsparkerClient
 {
     public class NetsparkerClient
     {
-        INetsparkerRestApi _api;
+        IHttpRequest _webRequest;
 
-        public NetsparkerClient(INetsparkerRestApi api)
+        public NetsparkerClient(IHttpRequest webRequest)
         {
-            _api = api;
+            _webRequest = webRequest;
+        }
+
+        public void Authenticate(string accessToken)
+        {
+            _webRequest.Authenticate(accessToken);
         }
 
         public Website WebSite()
         {
-            return new Website(_api);
+            return new Website(_webRequest);
         }
 
         public WebsiteGroup WebSiteGroup()
         {
-            return new WebsiteGroup(_api);
+            return new WebsiteGroup(_webRequest);
         }
 
         public Scan Scan()
         {
-            return new Scan(_api);
+            return new Scan(_webRequest);
         }
 
         public ScanPolicy ScanPolicy()
         {
-            return new ScanPolicy(_api);
+            return new ScanPolicy(_webRequest);
         }
     }
 
     public class Website
     {
-        INetsparkerRestApi _api;
+        IHttpRequest _webRequest;
 
-        public Website(INetsparkerRestApi api)
+        public Website(IHttpRequest webRequest)
         {
-            _api = api;
+            _webRequest = webRequest;
         }
 
         public ExecuteResult<PagedListApiResult<WebsiteApiModel>> List(int page = 1, int pageSize = 20)
         {
-            IHttpRequest request = new HttpRequest("https://www.netsparkercloud.com/api/1.0");
-            request.CreateRequest("/website/list");
-            request.Authenticate("asadaljkasdf567862745687a6sdf");
-
-
-            return _api.Get<PagedListApiResult<WebsiteApiModel>>(new { page = page, pageSize = pageSize }, ApiResource.Website.LIST);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Website.LIST, new { page = page, pageSize = pageSize })
+                              .Execute()
+                              .Get<PagedListApiResult<WebsiteApiModel>>();
         }
 
         public ExecuteResult<WebsiteApiModel> New(NewWebsiteApiModel webSite)
         {
-            return _api.Post<WebsiteApiModel>(webSite, ApiResource.Website.NEW);
+            return _webRequest.CreateRequest(ApiResource.Website.NEW)
+                              .Execute()
+                              .Post<WebsiteApiModel>(webSite);
         }
 
         public ExecuteResult<WebsiteApiModel> Update(UpdateWebsiteApiModel webSite)
         {
-            return _api.Post<WebsiteApiModel>(webSite, ApiResource.Website.UPDATE);
+            return _webRequest.CreateRequest(ApiResource.Website.UPDATE)
+                              .Execute()
+                              .Post<WebsiteApiModel>(webSite);
         }
 
         public ExecuteResult<DeleteWebsiteResult> Delete(DeleteWebsiteApiModel model)
         {
-            return _api.Post<DeleteWebsiteResult>(model, ApiResource.Website.DELETE);
+            return _webRequest.CreateRequest(ApiResource.Website.DELETE)
+                              .Execute()
+                              .Post<DeleteWebsiteResult>(model);
         }
 
         public ExecuteResult<VerifyOwnershipResult> Verify(VerifyApiModel model)
         {
-            return _api.Post<VerifyOwnershipResult>(model, ApiResource.Website.VERIFY);
+            return _webRequest.CreateRequest(ApiResource.Website.VERIFY)
+                              .Execute()
+                              .Post<VerifyOwnershipResult>(model);
         }
 
         public ExecuteResult<VerifyOwnershipResult> StartVerification(StartVerificationApiModel model)
         {
-            return _api.Post<VerifyOwnershipResult>(model, ApiResource.Website.START_VERIFICATION);
+            return _webRequest.CreateRequest(ApiResource.Website.START_VERIFICATION)
+                              .Execute()
+                              .Post<VerifyOwnershipResult>(model);
         }
 
         public ExecuteResult<VerifyOwnershipResult> VerificationFile(string websiteUrl)
         {
-            return _api.Get<VerifyOwnershipResult>(new { webSiteUrl = websiteUrl }, ApiResource.Website.VERIFICATION_FILE);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, new { webSiteUrl = websiteUrl })
+                              .Execute()
+                              .Get<VerifyOwnershipResult>();
         }
 
         public ExecuteResult<VerifyOwnershipResult> WebSiteSendVerificationEmail(string websiteUrl)
         {
-            return _api.Post<VerifyOwnershipResult>(websiteUrl, ApiResource.Website.SEND_VERIFICATION_EMAIL);
+            return _webRequest.CreateRequest(ApiResource.Website.SEND_VERIFICATION_EMAIL)
+                              .Execute()
+                              .Post<VerifyOwnershipResult>(websiteUrl);
         }
     }
 
     public class WebsiteGroup
     {
-        INetsparkerRestApi _api;
+        IHttpRequest _webRequest;
 
-        public WebsiteGroup(INetsparkerRestApi api)
+        public WebsiteGroup(IHttpRequest webRequest)
         {
-            _api = api;
+            _webRequest = webRequest;
         }
 
         public ExecuteResult<PagedListApiResult<WebsiteGroupApiModel>> List(int page = 1, int pageSize = 20)
         {
-            return _api.Get<PagedListApiResult<WebsiteGroupApiModel>>(new { page = page, pageSize = pageSize }, ApiResource.WebsiteGroup.LIST);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.WebsiteGroup.LIST, new { page = page, pageSize = pageSize })
+                              .Execute()
+                              .Get<PagedListApiResult<WebsiteGroupApiModel>>();
         }
 
         public ExecuteResult<WebsiteGroupApiModel> New(NewWebsiteGroupApiModel model)
         {
-            return _api.Post<WebsiteGroupApiModel>(model, ApiResource.WebsiteGroup.NEW);
+            return _webRequest.CreateRequest(ApiResource.WebsiteGroup.NEW)
+                              .Execute()
+                              .Post<WebsiteGroupApiModel>(model);
         }
 
         public ExecuteResult<WebsiteApiModel> Update(WebsiteGroupApiModel model)
         {
-            return _api.Post<WebsiteApiModel>(model, ApiResource.WebsiteGroup.UPDATE);
+            return _webRequest.CreateRequest(ApiResource.WebsiteGroup.UPDATE)
+                              .Execute()
+                              .Post<WebsiteApiModel>(model);
         }
 
         public ExecuteResult<string> Delete(DeleteWebsiteGroupApiModel model)
         {
-            return _api.Post<string>(model, ApiResource.WebsiteGroup.DELETE);
+            return _webRequest.CreateRequest(ApiResource.WebsiteGroup.DELETE)
+                              .Execute()
+                              .Post<string>(model); 
         }
     }
 
     public class Scan
     {
-        INetsparkerRestApi _api;
+        IHttpRequest _webRequest;
 
-        public Scan(INetsparkerRestApi api)
+        public Scan(IHttpRequest webRequest)
         {
-            _api = api;
+            _webRequest = webRequest;
         }
 
         public ExecuteResult<ScanTaskModel> New(NewScanTaskApiModel model)
         {
-            return _api.Post<ScanTaskModel>(model, ApiResource.Scans.NEW);
+            return _webRequest.CreateRequest(ApiResource.Scans.NEW)
+                              .Execute()
+                              .Post<ScanTaskModel>(model);
         }
 
         public ExecuteResult<string> Cancel(Guid scanid)
         {
-            return _api.Post<string>(scanid, ApiResource.Scans.NEW);
+            return _webRequest.CreateRequest(ApiResource.Scans.CANCEL)
+                              .Execute()
+                              .Post<string>(scanid);
         }
 
         public ExecuteResult<ScanTaskModel> Retest(BaseScanApiModel model)
         {
-            return _api.Post<ScanTaskModel>(model, ApiResource.Scans.RETEST);
+            return _webRequest.CreateRequest(ApiResource.Scans.RETEST)
+                              .Execute()
+                              .Post<ScanTaskModel>(model);
         }
 
         public ExecuteResult<ScanTaskModel> Incremental(BaseScanApiModel model)
         {
-            return _api.Post<ScanTaskModel>(model, ApiResource.Scans.INCREMENTAL);
+            return _webRequest.CreateRequest(ApiResource.Scans.INCREMENTAL)
+                              .Execute()
+                              .Post<ScanTaskModel>(model);
         }
 
         public ExecuteResult<string> Delete(List<Guid> scanids)
         {
-            return _api.Post<string>(scanids, ApiResource.Scans.DELETE);
+            return _webRequest.CreateRequest(ApiResource.Scans.DELETE)
+                              .Execute()
+                              .Post<string>(scanids);
         }
 
         public ExecuteResult<ApiScanStatusModel> Status(Guid id)
         {
-            return _api.Get<ApiScanStatusModel>(new { id = id }, ApiResource.Scans.STATUS);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.STATUS, new { id = id })
+                              .Execute()
+                              .Get<ApiScanStatusModel>();
         }
 
         public ExecuteResult<VulnerabilityModel> Result(Guid id)
         {
-            return _api.Get<VulnerabilityModel>(new { id = id }, ApiResource.Scans.RESULT);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.RESULT, new { id = id })
+                              .Execute()
+                              .Get<VulnerabilityModel>();
         }
 
         public ExecuteResult<PagedListApiResult<ScanTaskModel>> List(int page = 1, int pageSize = 20)
         {
-            return _api.Get<PagedListApiResult<ScanTaskModel>>(new { page = page, pageSize = pageSize }, ApiResource.Scans.LIST);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.LIST, new { page = page, pageSize = pageSize })
+                              .Execute()
+                              .Get<PagedListApiResult<ScanTaskModel>>();
         }
 
         public ExecuteResult<UpdateScheduledScanModel> Schedule(NewScheduledScanApiModel model)
         {
-            return _api.Post<UpdateScheduledScanModel>(model, ApiResource.Scans.SCHEDULE);
+            return _webRequest.CreateRequest(ApiResource.Scans.SCHEDULE)
+                              .Execute()
+                              .Post<UpdateScheduledScanModel>(model);
         }
 
         public ExecuteResult<string> Unschedule(Guid id)
         {
-            return _api.Post<string>(id, ApiResource.Scans.UNSCHEDULE);
+            return _webRequest.CreateRequest(ApiResource.Scans.UNSCHEDULE)
+                              .Execute()
+                              .Post<string>(id);
         }
 
         public ExecuteResult<UpdateScheduledScanModel> UpdateSchedule(UpdateScheduledScanApiModel model)
         {
-            return _api.Post<UpdateScheduledScanModel>(model, ApiResource.Scans.UPDATE_SCHEDULED);
+            return _webRequest.CreateRequest(ApiResource.Scans.UPDATE_SCHEDULED)
+                              .Execute()
+                              .Post<UpdateScheduledScanModel>(model);
         }
 
         //ToDo : Dökümanda sayfa dönmüyor. Parametre almasının anlamı ne ? Sorulacak.
         public ExecuteResult<PagedListApiResult<UpdateScheduledScanModel>> ListScheduled(int page = 1, int pageSize = 20)
         {
-            return _api.Get<PagedListApiResult<UpdateScheduledScanModel>>(new { page = page, pageSize = pageSize }, ApiResource.Scans.LIST_SCHEDULED);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.LIST_SCHEDULED, new { page = page, pageSize = pageSize })
+                              .Execute()
+                              .Get<PagedListApiResult<UpdateScheduledScanModel>>();
         }
 
         //ToDo: Ne döndürecek Reponse da bir bilgi yok
         public ExecuteResult<string> Report(Guid id, ReportType type, ReportFormat format, ContentFormat contentFormat = ContentFormat.Html)
         {
-            return _api.Get<string>(new { Id = id, Type = type, Format = format, ContentFormat = contentFormat }, ApiResource.Scans.LIST_SCHEDULED);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.REPORT, 
+                                                                new { Id = id, Type = type, Format = format, ContentFormat = contentFormat })
+                              .Execute()
+                              .Get<string>();
         }
     }
 
     public class ScanPolicy
     {
-        INetsparkerRestApi _api;
+        IHttpRequest _webRequest;
 
-        public ScanPolicy(INetsparkerRestApi api)
+        public ScanPolicy(IHttpRequest webRequest)
         {
-            _api = api;
+            _webRequest = webRequest;
         }
 
         public ExecuteResult<PagedListApiResult<ScanPolicySettingItemModel>> List(int page = 1, int pageSize = 20)
         {
-            return _api.Get<PagedListApiResult<ScanPolicySettingItemModel>>(new { page = page, pageSize = pageSize }, ApiResource.ScanPolicy.LIST);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.LIST, new { page = page, pageSize = pageSize })
+                              .Execute()
+                              .Get<PagedListApiResult<ScanPolicySettingItemModel>>();
         }
 
         public ExecuteResult<ScanPolicySettingApiModel> New(NewScanPolicySettingModel model)
         {
-            return _api.Post<ScanPolicySettingApiModel>(model, ApiResource.ScanPolicy.NEW);
+            return _webRequest.CreateRequest(ApiResource.ScanPolicy.NEW)
+                              .Execute()
+                              .Post<ScanPolicySettingApiModel>(model);
         }
 
         public ExecuteResult<ScanPolicyDeleteResult> Delete(string policyName)
         {
-            return _api.Post<ScanPolicyDeleteResult>(policyName, ApiResource.ScanPolicy.DELETE);
+            return _webRequest.CreateRequest(ApiResource.ScanPolicy.DELETE)
+                              .Execute()
+                              .Post<ScanPolicyDeleteResult>(policyName);
         }
 
-        public ExecuteResult<ScanPolicySettingApiModel> Update(UpdateScanPolicySettingModel webSite)
+        public ExecuteResult<ScanPolicySettingApiModel> Update(UpdateScanPolicySettingModel model)
         {
-            return _api.Post<ScanPolicySettingApiModel>(webSite, ApiResource.ScanPolicy.UPDATE);
+            return _webRequest.CreateRequest(ApiResource.ScanPolicy.UPDATE)
+                              .Execute()
+                              .Post<ScanPolicySettingApiModel>(model);
         }
 
         public ExecuteResult<ScanPolicySettingApiModel> Get(string name)
         {
-            return _api.Get<ScanPolicySettingApiModel>(new { name = name }, ApiResource.ScanPolicy.GET);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.GET, new { name = name })
+                              .Execute()
+                              .Get<ScanPolicySettingApiModel>();
         }
 
         public ExecuteResult<ScanPolicySettingApiModel> Get(Guid id)
         {
-            return _api.Get<ScanPolicySettingApiModel>(new { id = id }, ApiResource.ScanPolicy.GET);
+            return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.GET, new { id = id })
+                              .Execute()
+                              .Get<ScanPolicySettingApiModel>();
         }
     }
 }
