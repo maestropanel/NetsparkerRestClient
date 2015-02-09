@@ -58,6 +58,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ScanTests.cs" />
     <Compile Include="WebsiteGroupTests.cs" />
     <Compile Include="WebsiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

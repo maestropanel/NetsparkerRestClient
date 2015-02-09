@@ -183,5 +183,126 @@ namespace MaestroPanel.NetsparkerClient.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void website_should_be_verified_website()
+        {
+            var mockHttpRequest = new Mock<IHttpRequest>();
+
+            var testModel = new VerifyApiModel { WebsiteUrl = "http://foo.com" };
+
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<VerifyOwnershipResult>(testModel))
+                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = VerifyOwnershipResult.Verified
+                        });
+
+
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.VERIFY)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .Verify(testModel);
+
+            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
+            VerifyOwnershipResult actual = result.Data;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void website_should_be_start_verification_verified_website()
+        {
+            var mockHttpRequest = new Mock<IHttpRequest>();
+
+            var testModel = new StartVerificationApiModel { WebsiteUrl = "http://foo.com" };
+
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<VerifyOwnershipResult>(testModel))
+                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = VerifyOwnershipResult.Verified
+                        });
+
+
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.START_VERIFICATION)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .StartVerification(testModel);
+
+            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
+            VerifyOwnershipResult actual = result.Data;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void website_should_be_verification_file_verified_website()
+        {
+            var mockHttpRequest = new Mock<IHttpRequest>();
+
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Get<VerifyOwnershipResult>())
+                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = VerifyOwnershipResult.Verified
+                        });
+
+            mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, It.IsAny<object>()))
+                           .Returns(mockHttpRequest.Object);
+
+            mockHttpRequest.Setup(x => x.Execute())
+                           .Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .VerificationFile("http://foo.com");
+
+            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
+            VerifyOwnershipResult actual = result.Data;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void website_should_be_send_verification_email_verified_website()
+        {
+            var mockHttpRequest = new Mock<IHttpRequest>();
+
+            var mockExecuter = new Mock<IExecuter>();
+            mockExecuter.Setup(x => x.Post<VerifyOwnershipResult>(It.IsAny<string>()))
+                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+                        {
+                            Status = HttpStatusCode.OK,
+                            Data = VerifyOwnershipResult.Verified
+                        });
+
+
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.SEND_VERIFICATION_EMAIL))
+                           .Returns(mockHttpRequest.Object);
+
+            mockHttpRequest.Setup(x => x.Execute())
+                           .Returns(mockExecuter.Object);
+
+            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+
+            var result = netsparkerClient.WebSite()
+                                         .WebSiteSendVerificationEmail("http://foo.com");
+
+            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
+            VerifyOwnershipResult actual = result.Data;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

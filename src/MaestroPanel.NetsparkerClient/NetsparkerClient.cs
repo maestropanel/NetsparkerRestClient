@@ -167,11 +167,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<ScanTaskModel>(model);
         }
 
-        public ExecuteResult<string> Cancel(Guid scanid)
+        public ExecuteResult Cancel(Guid scanid)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.CANCEL)
                               .Execute()
-                              .Post<string>(scanid);
+                              .Post(scanid);
         }
 
         public ExecuteResult<ScanTaskModel> Retest(BaseScanApiModel model)
@@ -188,11 +188,12 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<ScanTaskModel>(model);
         }
 
-        public ExecuteResult<string> Delete(List<Guid> scanids)
+        //ToDo : Response bilgisi yok
+        public ExecuteResult Delete(List<Guid> scanids)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.DELETE)
                               .Execute()
-                              .Post<string>(scanids);
+                              .Post(scanids);
         }
 
         public ExecuteResult<ApiScanStatusModel> Status(Guid id)
@@ -223,11 +224,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<UpdateScheduledScanModel>(model);
         }
 
-        public ExecuteResult<string> Unschedule(Guid id)
+        public ExecuteResult Unschedule(Guid id)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.UNSCHEDULE)
                               .Execute()
-                              .Post<string>(id);
+                              .Post(id);
         }
 
         public ExecuteResult<UpdateScheduledScanModel> UpdateSchedule(UpdateScheduledScanApiModel model)
@@ -249,9 +250,15 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<string> Report(Guid id, ReportType type, ReportFormat format, ContentFormat contentFormat = ContentFormat.Html)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.REPORT, 
-                                                                new { Id = id, Type = type, Format = format, ContentFormat = contentFormat })
-                              .Execute()
-                              .Get<string>();
+                                                                new 
+                                                                { 
+                                                                    Id = id, 
+                                                                    Type = type, 
+                                                                    Format = format, 
+                                                                    ContentFormat = contentFormat 
+                                                                })
+                                                                .Execute()
+                                                                .Get<string>();
         }
     }
 

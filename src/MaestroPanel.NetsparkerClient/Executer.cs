@@ -12,6 +12,7 @@ namespace MaestroPanel.NetsparkerClient
 
     public interface IExecuter
     {
+        ExecuteResult Post(object model);
         ExecuteResult<T> Post<T>(object model);
         ExecuteResult<T> Get<T>();
     }
@@ -27,7 +28,7 @@ namespace MaestroPanel.NetsparkerClient
 
         public ExecuteResult<T> Post<T>(object model)
         {
-            if (model == null) 
+            if (model == null)
             {
                 throw new Exception("model could not be null");
             }
@@ -73,8 +74,11 @@ namespace MaestroPanel.NetsparkerClient
             }
             catch (WebException ex)
             {
+                var res = (HttpWebResponse)ex.Response;
+
                 return new ExecuteResult<T>
                 {
+                    Status = res.StatusCode,
                     ErrorMessage = ex.Message
                 };
             }
@@ -133,6 +137,56 @@ namespace MaestroPanel.NetsparkerClient
             catch (Exception ex)
             {
                 return new ExecuteResult<T>
+                {
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+
+        public ExecuteResult Post(object model)
+        {
+            if (model == null)
+            {
+                throw new Exception("model could not be null");
+            }
+
+            try
+            {
+                ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+
+                _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
+                _request.ReadWriteTimeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
+                _request.Method = "POST";
+                _request.ContentType = "application/json";
+
+                var jsonObject = JsonConvert.SerializeObject(model);
+                byte[] requestData = Encoding.UTF8.GetBytes(jsonObject);
+
+                using (Stream requesStream = _request.GetRequestStream())
+                {
+                    requesStream.Write(requestData, 0, requestData.Length);
+                }
+
+                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                {
+                    responseStream.GetResponseStream();
+
+                    return new ExecuteResult { Status = HttpStatusCode.OK };
+                }
+            }
+            catch (WebException ex)
+            {
+                var res = (HttpWebResponse)ex.Response;
+
+                return new ExecuteResult
+                {
+                    Status = res.StatusCode,
+                    ErrorMessage = ex.Message
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ExecuteResult
                 {
                     ErrorMessage = ex.Message
                 };
