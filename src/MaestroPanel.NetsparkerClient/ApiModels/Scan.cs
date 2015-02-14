@@ -9,7 +9,7 @@ namespace MaestroPanel.NetsparkerClient.Model
     public class NewScanTaskApiModel
     {
         public string TargetUri { get; set; }
-        public Guid PolicyId { get; set; }
+        public Guid? PolicyId { get; set; }
         public ScanTaskScope Scope { get; set; }
         public bool ExcludeLinks { get; set; }
         public List<ExcludedLinkModel> ExcludedLinks { get; set; }
@@ -97,22 +97,22 @@ namespace MaestroPanel.NetsparkerClient.Model
         public string TargetUrlRoot { get; set; }
         public string Initiated { get; set; }
         public string InitiatedDate { get; set; }
-        public Guid PolicyId { get; set; }
-        public ScanTaskScope Scope { get; set; }
+        public Guid? PolicyId { get; set; }
+        public ScanTaskScope? Scope { get; set; }
         public bool ExcludeLinks { get; set; }
         public string ExcludedLinks { get; set; }
         public string ImportedLinks { get; set; }
         public int TotalVulnerabilityCount { get; set; }
         public string WebsiteName { get; set; }
-        public Guid WebsiteId { get; set; }
+        public Guid? WebsiteId { get; set; }
         public string PolicyName { get; set; }
-        public Guid UserId { get; set; }
-        public UrlRewriteMode UrlRewriteMode { get; set; }
+        public Guid? UserId { get; set; }
+        public UrlRewriteMode? UrlRewriteMode { get; set; }
         public List<UrlRewriteRuleModel> UrlRewriteRules { get; set; }
         public string Cookies { get; set; }
         public string FormAuthUsername { get; set; }
-        public ScanTaskState State { get; set; }
-        public ScanPhase Phase { get; set; }
+        public ScanTaskState? State { get; set; }
+        public ScanPhase? Phase { get; set; }
         public int CompletedSteps { get; set; }
         public int EstimatedSteps { get; set; }
         public int Percentage { get; set; }
@@ -122,11 +122,11 @@ namespace MaestroPanel.NetsparkerClient.Model
         public int VulnerabilityImportantCount { get; set; }
         public int VulnerabilityCriticalCount { get; set; }
         public string FailureReasonString { get; set; }
-        public FailureReason FailureReason { get; set; }
+        public FailureReason? FailureReason { get; set; }
         public string FailureReasonDescription { get; set; }
-        public DateTime StateChanged { get; set; }
-        public ScanType ScanType { get; set; }
-        public ThreatLevel ThreatLevel { get; set; }
+        public DateTime? StateChanged { get; set; }
+        public ScanType? ScanType { get; set; }
+        public ThreatLevel? ThreatLevel { get; set; }
         public string ScanGroupId { get; set; }
         public bool IsCompleted { get; set; }
         public int EstimatedLaunchTime { get; set; }

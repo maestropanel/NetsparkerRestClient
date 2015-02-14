@@ -147,7 +147,7 @@ namespace MaestroPanel.NetsparkerClient
         {
             return _webRequest.CreateRequest(ApiResource.WebsiteGroup.DELETE)
                               .Execute()
-                              .Post<string>(model); 
+                              .Post<string>(model);
         }
     }
 
@@ -160,11 +160,11 @@ namespace MaestroPanel.NetsparkerClient
             _webRequest = webRequest;
         }
 
-        public ExecuteResult<ScanTaskModel> New(NewScanTaskApiModel model)
+        public ExecuteResult<List<ScanTaskModel>> New(NewScanTaskApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.NEW)
                               .Execute()
-                              .Post<ScanTaskModel>(model);
+                              .Post<List<ScanTaskModel>>(model);
         }
 
         public ExecuteResult Cancel(Guid scanid)
@@ -203,11 +203,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Get<ApiScanStatusModel>();
         }
 
-        public ExecuteResult<VulnerabilityModel> Result(Guid id)
+        public ExecuteResult<List<VulnerabilityModel>> Result(Guid id)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.RESULT, new { id = id })
                               .Execute()
-                              .Get<VulnerabilityModel>();
+                              .Get<List<VulnerabilityModel>>();
         }
 
         public ExecuteResult<PagedListApiResult<ScanTaskModel>> List(int page = 1, int pageSize = 20)
@@ -231,11 +231,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Post(id);
         }
 
-        public ExecuteResult<UpdateScheduledScanModel> UpdateSchedule(UpdateScheduledScanApiModel model)
+        public ExecuteResult<UpdateScheduledScanApiModel> UpdateSchedule(UpdateScheduledScanApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.UPDATE_SCHEDULED)
                               .Execute()
-                              .Post<UpdateScheduledScanModel>(model);
+                              .Post<UpdateScheduledScanApiModel>(model);
         }
 
         //ToDo : Dökümanda sayfa dönmüyor. Parametre almasının anlamı ne ? Sorulacak.
@@ -249,13 +249,13 @@ namespace MaestroPanel.NetsparkerClient
         //ToDo: Ne döndürecek Reponse da bir bilgi yok
         public ExecuteResult<string> Report(Guid id, ReportType type, ReportFormat format, ContentFormat contentFormat = ContentFormat.Html)
         {
-            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.REPORT, 
-                                                                new 
-                                                                { 
-                                                                    Id = id, 
-                                                                    Type = type, 
-                                                                    Format = format, 
-                                                                    ContentFormat = contentFormat 
+            return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.REPORT,
+                                                                new
+                                                                {
+                                                                    Id = id,
+                                                                    Type = type,
+                                                                    Format = format,
+                                                                    ContentFormat = contentFormat
                                                                 })
                                                                 .Execute()
                                                                 .Get<string>();

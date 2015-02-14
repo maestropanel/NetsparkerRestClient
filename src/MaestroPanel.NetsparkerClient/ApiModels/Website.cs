@@ -8,6 +8,9 @@ namespace MaestroPanel.NetsparkerClient.Model
 {
     public class NewWebsiteApiModel
     {
+        /// <summary>
+        /// Required Max length: 99
+        /// </summary>                
         public string Name { get; set; }
         public string RootUrl { get; set; }
         public List<string> Groups { get; set; }

@@ -159,8 +159,8 @@ namespace MaestroPanel.NetsparkerClient
                 _request.Method = "POST";
                 _request.ContentType = "application/json";
 
-                var jsonObject = JsonConvert.SerializeObject(model);
-                byte[] requestData = Encoding.UTF8.GetBytes(jsonObject);
+                string requestContent = JsonConvert.SerializeObject(model);
+                byte[] requestData = Encoding.UTF8.GetBytes(requestContent);
 
                 using (Stream requesStream = _request.GetRequestStream())
                 {
