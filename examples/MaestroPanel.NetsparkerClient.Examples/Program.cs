@@ -18,6 +18,34 @@ namespace MaestroPanel.NetsparkerClient.Examples
             //Netsparker Authenticate
             client.Authenticate("your-access-token-from-netsparker");
 
+            //Delete Existing WebSite
+            var deleteWebSiteResult = client.WebSite()
+                                            .Delete(new DeleteWebsiteApiModel
+                                                      {
+                                                          RootUrl = "http://demo.maestrodemo.com/"
+                                                      });
+            //New WebSite
+            var addWebSiteResult = client.WebSite()
+                                         .New(new NewWebsiteApiModel
+                                         {
+                                             FormAuthentication = new FormAuthentication
+                                             {
+                                                 LoginFormUrl = "http://demo.maestropanel.org:9715",
+                                                 Personas = new List<FormAuthenticationPerson> 
+                                                 {
+                                                      new FormAuthenticationPerson
+                                                      {
+                                                           IsDefault = true,
+                                                           Username = "admin",
+                                                           Password = "1"
+                                                      }
+                                                 }
+                                             },
+                                             Groups = new List<string> { "Default" },
+                                             Name = "added by emre",
+                                             RootUrl = "http://demo.maestropanel.org:9715"
+                                         });
+
             //Start New Scan
             var newScanResult = client.Scan()
                                       .New(new NewScanTaskApiModel
@@ -26,6 +54,11 @@ namespace MaestroPanel.NetsparkerClient.Examples
                                           FormAuthUsername = "username"
                                       });
             Console.WriteLine("Scan Id:{0}", newScanResult.Data[0].Id);
+
+            //Scan List
+            var scanListResult = client.Scan()
+                                       .List();
+            Console.WriteLine("Scan Count : {0}", scanListResult.Data.List.Count);
 
 
             //Check Existing Scan Status

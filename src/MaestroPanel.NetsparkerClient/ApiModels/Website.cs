@@ -86,16 +86,23 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         public FormAuthentication()
         {
-            Personas = new List<Person>();
+            Personas = new List<FormAuthenticationPerson>();
         }
 
-        public string LoginUrl { get; set; }
-        public List<Person> Personas { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
+        public string LoginFormUrl { get; set; }
+        public List<FormAuthenticationPerson> Personas { get; set; }
     }
 
-    public class Person
+    public class FormAuthenticationPerson
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Username { get; set; }
+        public string Password { get; set; }
         public bool IsDefault { get; set; }
     }
 

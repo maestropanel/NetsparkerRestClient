@@ -129,7 +129,7 @@ namespace MaestroPanel.NetsparkerClient.Model
         public ThreatLevel? ThreatLevel { get; set; }
         public string ScanGroupId { get; set; }
         public bool IsCompleted { get; set; }
-        public int EstimatedLaunchTime { get; set; }
+        public int? EstimatedLaunchTime { get; set; }
     }
 
     public class BaseScanApiModel
