@@ -31,30 +31,31 @@ namespace MaestroPanel.NetsparkerClient
         private HttpWebRequest _request;
 
         private string _accessToken;
+        private string _baseUrl;
         private string _url;
 
         public HttpRequest(string baseUrl)
         {
-            _url = baseUrl;
+            _baseUrl = baseUrl;
         }
 
         public IHttpRequest CreateRequest(string path)
         {
-            _url = UrlTools.Combine(_url, path);
+            _url = UrlTools.Combine(_baseUrl, path);
 
             return this;
         }
 
         public IHttpRequest CreateRequestWithQueryString(string path, object parameters)
         {
-            _url = string.Format("{0}?{1}", UrlTools.Combine(_url, path), UrlTools.ToQueryString(parameters));
+            _url = string.Format("{0}?{1}", UrlTools.Combine(_baseUrl, path), UrlTools.ToQueryString(parameters));
 
             return this;
         }
 
         public IHttpRequest CreateRequestWithQueryString(string path, IDictionary<string, string> parameters)
         {
-            _url = string.Format("{0}?{1}", UrlTools.Combine(_url, path), UrlTools.ToQueryString(parameters));
+            _url = string.Format("{0}?{1}", UrlTools.Combine(_baseUrl, path), UrlTools.ToQueryString(parameters));
 
             return this;
         }
