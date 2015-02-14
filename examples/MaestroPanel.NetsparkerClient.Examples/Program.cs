@@ -33,6 +33,15 @@ namespace MaestroPanel.NetsparkerClient.Examples
                               .Status(newScanResult.Data[0].Id);
             Console.WriteLine("State : {0}", statusResult.Data.State);
 
+
+            //Completed Scan ReTest 
+            var retestResult = client.Scan()
+                                     .Retest(new BaseScanApiModel
+                                     {
+                                         BaseScanId = newScanResult.Data[0].Id
+                                     });
+            Console.WriteLine(retestResult.Data.State);
+
             //Cancel Existing Scan
             var cancelResult = client.Scan()
                                      .Cancel(newScanResult.Data[0].Id);
