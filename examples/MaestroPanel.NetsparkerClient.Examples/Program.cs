@@ -22,8 +22,8 @@ namespace MaestroPanel.NetsparkerClient.Examples
             var newScanResult = client.Scan()
                                       .New(new NewScanTaskApiModel
                                       {
-                                          TargetUri = "http://demo.maestropanel.net:9715",
-                                          FormAuthUsername = "admin"
+                                          TargetUri = "http://yourdomain.com",
+                                          FormAuthUsername = "username"
                                       });
             Console.WriteLine("Scan Id:{0}", newScanResult.Data[0].Id);
 
