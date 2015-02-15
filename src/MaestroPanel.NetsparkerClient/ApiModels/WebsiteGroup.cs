@@ -8,8 +8,16 @@ namespace MaestroPanel.NetsparkerClient.Model
 {
     public class WebsiteGroupApiModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public Guid Id { get; set; }
         public int TotalWebsites { get; set; }
+
+        /// <summary>
+        /// Required
+        /// Max length: 99
+        /// </summary>
         public string Name { get; set; }
     }
 
@@ -21,11 +29,19 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class NewWebsiteGroupApiModel
     {
+        /// <summary>
+        /// Required
+        /// Max length: 99
+        /// </summary>
         public string Name { get; set; }
     }
 
     public class DeleteWebsiteGroupApiModel
     {
+        /// <summary>
+        /// Required
+        /// Max length: 99
+        /// </summary>
         public string Name { get; set; }
     }
 }

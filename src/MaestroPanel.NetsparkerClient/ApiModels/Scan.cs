@@ -8,6 +8,9 @@ namespace MaestroPanel.NetsparkerClient.Model
 {
     public class NewScanTaskApiModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string TargetUri { get; set; }
         public Guid? PolicyId { get; set; }
         public ScanTaskScope Scope { get; set; }
@@ -161,10 +164,25 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class NewScheduledScanApiModel
     {
+        /// <summary>
+        /// Required
+        /// Max length: 99
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string NextExecutionTime { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public ScheduleRunType ScheduleRunType { get; set; }
 
+        /// <summary>
+        /// Required
+        /// </summary>
         public string TargetUri { get; set; }
         public Guid PolicyId { get; set; }
         public ScanTaskScope Scope { get; set; }
@@ -178,12 +196,31 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class UpdateScheduledScanApiModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public Guid Id { get; set; }
         public bool Disabled { get; set; }
+
+        /// <summary>
+        /// Required
+        /// Max length:99
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Required
+        /// </summary>
         public string NextExecutionTime { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public ScheduleRunType ScheduleRunType { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string TargetUri { get; set; }
         public Guid PolicyId { get; set; }
         public ScanTaskScope Scope { get; set; }

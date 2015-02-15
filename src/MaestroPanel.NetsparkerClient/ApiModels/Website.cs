@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MaestroPanel.NetsparkerClient.Model
 {
     public class NewWebsiteApiModel
     {
         /// <summary>
-        /// Required Max length: 99
+        /// Required 
+        /// Max length: 99
         /// </summary>                
         public string Name { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string RootUrl { get; set; }
         public List<string> Groups { get; set; }
         public BasicAuthentication BasicAuthentication { get; set; }
@@ -21,7 +27,15 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class UpdateWebsiteApiModel
     {
+        /// <summary>
+        /// Required
+        /// Max length: 99
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string RootUrl { get; set; }
         public List<string> Groups { get; set; }
         public BasicAuthentication BasicAuthentication { get; set; }
@@ -43,6 +57,9 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class DeleteWebsiteApiModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string RootUrl { get; set; }
     }
 
@@ -50,6 +67,10 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         public VerificationMethod VerificationMethod { get; set; }
         public string VerificationSecret { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string WebsiteUrl { get; set; }
     }
 
@@ -63,7 +84,14 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class StartVerificationApiModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public VerificationMethod VerificationMethod { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string WebsiteUrl { get; set; }
     }
 
@@ -75,11 +103,18 @@ namespace MaestroPanel.NetsparkerClient.Model
     public class BasicAuthentication : Authentication
     {
         public string Username { get; set; }
+        public string Password { get; set; }
+        public string Domain { get; set; }
     }
 
     public class ClientCertificateAuthentication : Authentication
     {
+        /// <summary>
+        /// Required
+        /// </summary>
+        public HttpPostedFileBase Certificate { get; set; }
 
+        public string Password { get; set; }
     }
 
     public class FormAuthentication : Authentication
