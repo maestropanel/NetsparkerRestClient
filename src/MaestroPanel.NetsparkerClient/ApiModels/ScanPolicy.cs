@@ -34,16 +34,39 @@ namespace MaestroPanel.NetsparkerClient.Model
         public bool IsReadonly { get; set; }
 
         public bool IsShared { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
         public string Description { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public CrawlingSettingModel CrawlingSettings { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public AttackingSettingModel AttackingSettings { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public Custom404SettingModel Custom404Settings { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public ScopeSettingModel ScopeSettings { get; set; }
         public List<IgnorePatternSettingModel> IgnorePatternSettings { get; set; }
         public List<FormValueSettingModel> FormValueSettings { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public BruteForceSettingModel BruteForceSettings { get; set; }
         public List<AutoCompleteSettingModel> AutoCompleteSettings { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public HttpRequestSettingModel HttpRequestSettings { get; set; }
         public List<CustomHttpHeaderSetting> CustomHttpHeaderSettings { get; set; }
         public bool EnableKnowledgebase { get; set; }
@@ -56,16 +79,44 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         public Guid Id { get; set; }
         public bool IsShared { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
         public string Description { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public CrawlingSettingModel CrawlingSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public AttackingSettingModel AttackingSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public Custom404SettingModel Custom404Settings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public ScopeSettingModel ScopeSettings { get; set; }
         public List<IgnorePatternSettingModel> IgnorePatternSettings { get; set; }
         public List<FormValueSettingModel> FormValueSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public BruteForceSettingModel BruteForceSettings { get; set; }
         public List<AutoCompleteSettingModel> AutoCompleteSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public HttpRequestSettingModel HttpRequestSettings { get; set; }
         public List<CustomHttpHeaderSetting> CustomHttpHeaderSettings { get; set; }
         public bool EnableKnowledgebase { get; set; }
@@ -77,16 +128,44 @@ namespace MaestroPanel.NetsparkerClient.Model
     public class UpdateScanPolicySettingModel
     {
         public bool IsShared { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
         public string Description { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public CrawlingSettingModel CrawlingSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public AttackingSettingModel AttackingSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public Custom404SettingModel Custom404Settings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public ScopeSettingModel ScopeSettings { get; set; }
         public List<IgnorePatternSettingModel> IgnorePatternSettings { get; set; }
         public List<FormValueSettingModel> FormValueSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public BruteForceSettingModel BruteForceSettings { get; set; }
         public List<AutoCompleteSettingModel> AutoCompleteSettings { get; set; }
+
+        /// <summary>
+        /// Required
+        /// </summary>
         public HttpRequestSettingModel HttpRequestSettings { get; set; }
         public List<CustomHttpHeaderSetting> CustomHttpHeaderSettings { get; set; }
         public bool EnableKnowledgebase { get; set; }
@@ -97,6 +176,9 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class AttackingSettingModel
     {
+        /// <summary>
+        /// Range: inclusive between 1 and 200
+        /// </summary>
         public int MaxParametersToAttack { get; set; }
         public string AntiCsrfTokenNames { get; set; }
         public bool UseExtraParameters { get; set; }
@@ -106,7 +188,13 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         public bool DisableAuto404Detection { get; set; }
         public string Custom404RegEx { get; set; }
+        /// <summary>
+        /// Range: inclusive between 0 and 1000
+        /// </summary>
         public int Max404PagesToTest { get; set; }
+        /// <summary>
+        /// Range: inclusive between 0 and 250
+        /// </summary>
         public int Maximum404Signature { get; set; }
     }
 
@@ -125,15 +213,35 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class IgnorePatternSettingModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Pattern { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public IgnorePatternHttpMethod ParameterType { get; set; }
     }
 
     public class CrawlingSettingModel
     {
+        /// <summary>
+        /// Range: inclusive between 50 and 15000
+        /// </summary>
         public int MaximumCrawlerUrlCount { get; set; }
+
+        /// <summary>
+        /// Range: inclusive between 1 and 9999
+        /// </summary>
         public int MaximumSignature { get; set; }
+
+        /// <summary>
+        /// Range: inclusive between 1 and 9999
+        /// </summary>
         public int PageVisitLimit { get; set; }
         public bool WaitResourceFinder { get; set; }
         public bool EnableTextParser { get; set; }
@@ -151,7 +259,13 @@ namespace MaestroPanel.NetsparkerClient.Model
 
     public class FormValueSettingModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Value { get; set; }
         public string Pattern { get; set; }
         public FormValueMatch Match { get; set; }
@@ -162,17 +276,26 @@ namespace MaestroPanel.NetsparkerClient.Model
     public class BruteForceSettingModel
     {
         public bool EnableAuthBruteForce { get; set; }
+        /// <summary>
+        /// Range: inclusive between 1 and 5000
+        /// </summary>
         public int MaxBruteForce { get; set; }
     }
 
     public class AutoCompleteSettingModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Value { get; set; }
     }
 
     public class HttpRequestSettingModel
     {
         public string UserAgent { get; set; }
+        /// <summary>
+        /// Range: inclusive between 1 and 1000
+        /// </summary>
         public int RequestTimeout { get; set; }
         public string Accept { get; set; }
         public string AcceptCharset { get; set; }
@@ -180,18 +303,30 @@ namespace MaestroPanel.NetsparkerClient.Model
         public bool EnableCookies { get; set; }
         public bool HttpKeepAlive { get; set; }
         public bool EnableGzipAndDeflate { get; set; }
+        /// <summary>
+        /// Range: inclusive between 1 and 25
+        /// </summary>
         public int ThreadCount { get; set; }
     }
 
     public class CustomHttpHeaderSetting
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Value { get; set; }
         public bool Enabled { get; set; }
     }
 
     public class SensitiveKeywordSettingModel
     {
+        /// <summary>
+        /// Required
+        /// </summary>
         public string Pattern { get; set; }
     }
 

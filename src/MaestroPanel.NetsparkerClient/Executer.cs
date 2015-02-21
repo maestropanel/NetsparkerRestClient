@@ -74,13 +74,20 @@ namespace MaestroPanel.NetsparkerClient
             }
             catch (WebException ex)
             {
-                var res = (HttpWebResponse)ex.Response;
-
-                return new ExecuteResult<T>
+                using (var errRes = (HttpWebResponse)ex.Response)
                 {
-                    Status = res.StatusCode,
-                    ErrorMessage = ex.Message
-                };
+                    using (var reader = new StreamReader(errRes.GetResponseStream()))
+                    {
+                        string error = reader.ReadToEnd();
+
+                        return new ExecuteResult<T>
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = ex.Message,
+                            Content = error
+                        };
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -126,13 +133,20 @@ namespace MaestroPanel.NetsparkerClient
             }
             catch (WebException ex)
             {
-                var res = (HttpWebResponse)ex.Response;
-
-                return new ExecuteResult<T>
+                using (var errRes = (HttpWebResponse)ex.Response)
                 {
-                    ErrorMessage = ex.Message,
-                    Status = res.StatusCode
-                };
+                    using (var reader = new StreamReader(errRes.GetResponseStream()))
+                    {
+                        string error = reader.ReadToEnd();
+
+                        return new ExecuteResult<T>
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = ex.Message,
+                            Content = error
+                        };
+                    }
+                }
             }
             catch (Exception ex)
             {
