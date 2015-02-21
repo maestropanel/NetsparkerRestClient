@@ -16,7 +16,20 @@ namespace MaestroPanel.NetsparkerClient.Examples
                          new HttpRequest("https://www.netsparkercloud.com/api/1.0/"));
 
             //Netsparker Authenticate
-            client.Authenticate("your-access-token-from-netsparker");
+            //client.Authenticate("your-access-token-from-netsparker");
+
+            ExecuteResult<VerifyOwnershipResult> vResult = client.WebSite().Verify(new VerifyApiModel
+            {
+                VerificationMethod = VerificationMethod.File,
+                VerificationSecret = "website id",
+                WebsiteUrl = "http://maestropanel.com"
+            });
+
+            Console.WriteLine(vResult.Content);
+            Console.WriteLine(vResult.ErrorMessage);
+            Console.WriteLine(vResult.Status);
+
+            Console.ReadKey();
 
             //Start New Scan
             var newScanResult = client.Scan()

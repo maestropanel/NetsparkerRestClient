@@ -69,7 +69,7 @@ namespace MaestroPanel.NetsparkerClient
 
         public IExecuter Execute()
         {
-            _request = _request = HttpWebRequest.CreateHttp(_url);
+            _request = _request = (HttpWebRequest)HttpWebRequest.Create(_url);
 
             if (!string.IsNullOrWhiteSpace(_accessToken))
             {

@@ -99,10 +99,10 @@ namespace MaestroPanel.NetsparkerClient.Model
         public string InitiatedDate { get; set; }
         public Guid? PolicyId { get; set; }
         public ScanTaskScope? Scope { get; set; }
-        public bool ExcludeLinks { get; set; }
+        public bool? ExcludeLinks { get; set; }
         public string ExcludedLinks { get; set; }
         public string ImportedLinks { get; set; }
-        public int TotalVulnerabilityCount { get; set; }
+        public int? TotalVulnerabilityCount { get; set; }
         public string WebsiteName { get; set; }
         public Guid? WebsiteId { get; set; }
         public string PolicyName { get; set; }
@@ -113,14 +113,14 @@ namespace MaestroPanel.NetsparkerClient.Model
         public string FormAuthUsername { get; set; }
         public ScanTaskState? State { get; set; }
         public ScanPhase? Phase { get; set; }
-        public int CompletedSteps { get; set; }
-        public int EstimatedSteps { get; set; }
-        public int Percentage { get; set; }
-        public int VulnerabilityInfoCount { get; set; }
-        public int VulnerabilityLowCount { get; set; }
-        public int VulnerabilityMediumCount { get; set; }
-        public int VulnerabilityImportantCount { get; set; }
-        public int VulnerabilityCriticalCount { get; set; }
+        public int? CompletedSteps { get; set; }
+        public int? EstimatedSteps { get; set; }
+        public int? Percentage { get; set; }
+        public int? VulnerabilityInfoCount { get; set; }
+        public int? VulnerabilityLowCount { get; set; }
+        public int? VulnerabilityMediumCount { get; set; }
+        public int? VulnerabilityImportantCount { get; set; }
+        public int? VulnerabilityCriticalCount { get; set; }
         public string FailureReasonString { get; set; }
         public FailureReason? FailureReason { get; set; }
         public string FailureReasonDescription { get; set; }
@@ -128,8 +128,8 @@ namespace MaestroPanel.NetsparkerClient.Model
         public ScanType? ScanType { get; set; }
         public ThreatLevel? ThreatLevel { get; set; }
         public string ScanGroupId { get; set; }
-        public bool IsCompleted { get; set; }
-        public int EstimatedLaunchTime { get; set; }
+        public bool? IsCompleted { get; set; }
+        public int? EstimatedLaunchTime { get; set; }
     }
 
     public class BaseScanApiModel
