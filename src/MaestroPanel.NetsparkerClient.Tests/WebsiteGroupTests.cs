@@ -37,7 +37,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.WebsiteGroup.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var webSiteList = netsparkerClient.WebSiteGroup()
                                               .List();
@@ -74,7 +74,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.WebsiteGroup.NEW)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSiteGroup()
                                          .New(testModel);

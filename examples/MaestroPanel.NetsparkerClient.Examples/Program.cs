@@ -12,7 +12,7 @@ namespace MaestroPanel.NetsparkerClient.Examples
     {
         static void Main(string[] args)
         {
-            var client = new NetsparkerClient(
+            var client = new NetsparkerRestClient(
                          new HttpRequest("https://www.netsparkercloud.com/api/1.0/"));
 
             //Netsparker Authenticate

@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace MaestroPanel.NetsparkerClient
 {
-    public class NetsparkerClient
+    public class NetsparkerRestClient
     {
         IHttpRequest _webRequest;
 
-        public NetsparkerClient(IHttpRequest webRequest)
+        public NetsparkerRestClient(IHttpRequest webRequest)
         {
             _webRequest = webRequest;
         }

@@ -33,10 +33,11 @@ namespace MaestroPanel.HttpRequest.Tests
         public void executer_get_should_be_throw_webexception()
         {
             byte[] buffer = Encoding.UTF8.GetBytes("{ IsSuccess : true }");
-
+            byte[] exBuffer = Encoding.UTF8.GetBytes("{ Messages : [ \"Test Error\" ] }");
             var mockHttpWebRequest = new Mock<HttpWebRequest>();
             var mockHttpWebResponse = new Mock<HttpWebResponse>();
             mockHttpWebResponse.Setup(x => x.StatusCode).Returns(HttpStatusCode.Unauthorized);
+            mockHttpWebResponse.Setup(x => x.GetResponseStream()).Returns(new MemoryStream(exBuffer));
 
             mockHttpWebRequest.Setup(x => x.GetResponse())
                               .Throws(new WebException("foo", null, WebExceptionStatus.ConnectFailure, mockHttpWebResponse.Object));

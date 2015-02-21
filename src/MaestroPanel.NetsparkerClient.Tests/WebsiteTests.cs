@@ -34,7 +34,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var webSiteList = netsparkerClient.WebSite()
                                               .List();
@@ -61,7 +61,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.LIST, It.IsAny<object>())).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var webSiteList = netsparkerClient.WebSite()
                                               .List();
@@ -100,7 +100,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.NEW)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                               .New(testModel);
@@ -139,7 +139,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.UPDATE)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .Update(testModel);
@@ -173,7 +173,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.DELETE)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .Delete(testModel);
@@ -203,7 +203,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.VERIFY)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .Verify(testModel);
@@ -233,7 +233,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.START_VERIFICATION)).Returns(mockHttpRequest.Object);
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .StartVerification(testModel);
@@ -263,7 +263,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.Execute())
                            .Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .VerificationFile("http://foo.com");
@@ -294,7 +294,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             mockHttpRequest.Setup(x => x.Execute())
                            .Returns(mockExecuter.Object);
 
-            var netsparkerClient = new NetsparkerClient(mockHttpRequest.Object);
+            var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
 
             var result = netsparkerClient.WebSite()
                                          .WebSiteSendVerificationEmail("http://foo.com");

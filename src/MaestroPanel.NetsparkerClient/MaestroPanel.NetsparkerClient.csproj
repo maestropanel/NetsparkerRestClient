@@ -59,7 +59,7 @@
     <Compile Include="ExecuterResult.cs" />
     <Compile Include="HttpRequest.cs" />
     <Compile Include="ApiModels\Website.cs" />
-    <Compile Include="NetsparkerClient.cs" />
+    <Compile Include="NetsparkerRestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlTools.cs" />
   </ItemGroup>
