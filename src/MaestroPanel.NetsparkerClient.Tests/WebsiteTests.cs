@@ -219,7 +219,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
         {
             var mockHttpRequest = new Mock<IHttpRequest>();
 
-            var testModel = new StartVerificationApiModel { WebsiteUrl = "http://foo.com" };
+            var testModel = new StartVerificationApiModel { VerificationMethod = Model.VerificationMethod.File, WebsiteUrl = "http://foo.com" };
 
             var mockExecuter = new Mock<IExecuter>();
             mockExecuter.Setup(x => x.Post<VerifyOwnershipResult>(testModel))
@@ -238,8 +238,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var result = netsparkerClient.WebSite()
                                          .StartVerification(testModel);
 
-            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
-            VerifyOwnershipResult actual = result.Data;
+            VerifyOwnershipResult expected = VerifyOwnershipResult.NotVerified;
+            VerifyOwnershipResult actual = result.Data.VerifyOwnershipResult;
 
             Assert.AreEqual(expected, actual);
         }
@@ -268,10 +268,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var result = netsparkerClient.WebSite()
                                          .VerificationFile("http://foo.com");
 
-            VerifyOwnershipResult expected = VerifyOwnershipResult.Verified;
-            VerifyOwnershipResult actual = result.Data;
-
-            Assert.AreEqual(expected, actual);
+            Assert.AreNotEqual(string.Empty, result.Data);
         }
 
         [TestMethod]

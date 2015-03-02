@@ -95,6 +95,13 @@ namespace MaestroPanel.NetsparkerClient.Model
         public string WebsiteUrl { get; set; }
     }
 
+    public class StartVerificationResponse
+    {
+        public VerifyOwnershipResult VerifyOwnershipResult { get; set; }
+        public string Message { get; set; }
+        public string Data { get; set; }
+    }
+
     public abstract class Authentication
     {
         public bool IsConfigured { get; set; }

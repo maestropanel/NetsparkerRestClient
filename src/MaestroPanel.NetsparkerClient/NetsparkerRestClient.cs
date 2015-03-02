@@ -91,18 +91,18 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<VerifyOwnershipResult>(model);
         }
 
-        public ExecuteResult<VerifyOwnershipResult> StartVerification(StartVerificationApiModel model)
+        public ExecuteResult<StartVerificationResponse> StartVerification(StartVerificationApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Website.START_VERIFICATION)
                               .Execute()
-                              .Post<VerifyOwnershipResult>(model);
+                              .Post<StartVerificationResponse>(model);
         }
 
-        public ExecuteResult<VerifyOwnershipResult> VerificationFile(string websiteUrl)
+        public ExecuteResult<string> VerificationFile(string websiteUrl)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, new { webSiteUrl = websiteUrl })
                               .Execute()
-                              .Get<VerifyOwnershipResult>();
+                              .Get<string>();
         }
 
         public ExecuteResult<VerifyOwnershipResult> WebSiteSendVerificationEmail(string websiteUrl)
