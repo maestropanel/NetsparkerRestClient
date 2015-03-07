@@ -10,12 +10,12 @@ namespace MaestroPanel.NetsparkerClient
     public class ExecuteResult<T> : ExecuteResult
     {
         public T Data { get; set; }
-        public string Content { get; set; }
     }
 
     public class ExecuteResult
     {
         public HttpStatusCode Status { get; set; }
         public string ErrorMessage { get; set; }
+        public string Content { get; set; }
     }
 }

@@ -98,11 +98,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<StartVerificationResponse>(model);
         }
 
-        public ExecuteResult<string> VerificationFile(string websiteUrl)
+        public ExecuteResult VerificationFile(string websiteUrl)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, new { webSiteUrl = websiteUrl })
                               .Execute()
-                              .Get<string>();
+                              .Get();
         }
 
         public ExecuteResult<VerifyOwnershipResult> WebSiteSendVerificationEmail(string websiteUrl)
@@ -143,11 +143,11 @@ namespace MaestroPanel.NetsparkerClient
                               .Post<WebsiteApiModel>(model);
         }
 
-        public ExecuteResult<string> Delete(DeleteWebsiteGroupApiModel model)
+        public ExecuteResult Delete(DeleteWebsiteGroupApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.WebsiteGroup.DELETE)
                               .Execute()
-                              .Post<string>(model);
+                              .Post(model);
         }
     }
 
@@ -247,7 +247,7 @@ namespace MaestroPanel.NetsparkerClient
         }
 
         //ToDo: Ne döndürecek Reponse da bir bilgi yok
-        public ExecuteResult<string> Report(Guid id, ReportType type, ReportFormat format, ContentFormat contentFormat = ContentFormat.Html)
+        public ExecuteResult Report(Guid id, ReportType type, ReportFormat format, ContentFormat contentFormat = ContentFormat.Html)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.REPORT,
                                                                 new
@@ -258,7 +258,7 @@ namespace MaestroPanel.NetsparkerClient
                                                                     ContentFormat = contentFormat
                                                                 })
                                                                 .Execute()
-                                                                .Get<string>();
+                                                                .Get();
         }
     }
 

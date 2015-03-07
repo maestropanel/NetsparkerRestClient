@@ -15,6 +15,7 @@ namespace MaestroPanel.NetsparkerClient
         ExecuteResult Post(object model);
         ExecuteResult<T> Post<T>(object model);
         ExecuteResult<T> Get<T>();
+        ExecuteResult Get();
     }
 
     public class Executer : IExecuter
@@ -197,6 +198,62 @@ namespace MaestroPanel.NetsparkerClient
                     Status = res.StatusCode,
                     ErrorMessage = ex.Message
                 };
+            }
+            catch (Exception ex)
+            {
+                return new ExecuteResult
+                {
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+
+        public ExecuteResult Get()
+        {
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+
+            try
+            {
+                _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
+                _request.ReadWriteTimeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
+                _request.Method = "GET";
+                _request.ContentType = "application/x-www-form-urlencoded";
+
+                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                {
+                    var responseData = responseStream.GetResponseStream();
+
+                    if (responseData == null)
+                        return new ExecuteResult
+                        {
+                            Status = HttpStatusCode.OK
+                        };
+
+                    string content = new StreamReader(responseData).ReadToEnd();
+
+                    return new ExecuteResult
+                    {
+                        Status = responseStream.StatusCode,
+                        Content = content
+                    };
+                }
+            }
+            catch (WebException ex)
+            {
+                using (var errRes = (HttpWebResponse)ex.Response)
+                {
+                    using (var reader = new StreamReader(errRes.GetResponseStream()))
+                    {
+                        string error = reader.ReadToEnd();
+
+                        return new ExecuteResult
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = ex.Message,
+                            Content = error
+                        };
+                    }
+                }
             }
             catch (Exception ex)
             {
