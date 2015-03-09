@@ -464,11 +464,11 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var mockHttpRequest = new Mock<IHttpRequest>();
 
             var mockExecuter = new Mock<IExecuter>();
-            mockExecuter.Setup(x => x.Get<string>())
-                        .Returns(new ExecuteResult<string>
+            mockExecuter.Setup(x => x.Get())
+                        .Returns(new ExecuteResult
                         {
                             Status = HttpStatusCode.OK,
-                            Data = "xml"
+                            Content = "xml"
                         });
 
 
@@ -484,7 +484,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
                                        .Report(Guid.NewGuid(), ReportType.Vulnerabilities, ReportFormat.Xml);
 
             string expected = "xml";
-            string actual = scan.Data;
+            string actual = scan.Content;
 
             Assert.AreEqual(expected, actual);
         }

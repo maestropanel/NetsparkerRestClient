@@ -219,18 +219,24 @@ namespace MaestroPanel.NetsparkerClient.Tests
         {
             var mockHttpRequest = new Mock<IHttpRequest>();
 
-            var testModel = new StartVerificationApiModel { VerificationMethod = Model.VerificationMethod.File, WebsiteUrl = "http://foo.com" };
+            var testModel = new StartVerificationApiModel
+            {
+                VerificationMethod = Model.VerificationMethod.File,
+                WebsiteUrl = "http://foo.com"
+            };
 
             var mockExecuter = new Mock<IExecuter>();
-            mockExecuter.Setup(x => x.Post<VerifyOwnershipResult>(testModel))
-                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+            mockExecuter.Setup(x => x.Post<StartVerificationResponse>(testModel))
+                        .Returns(new ExecuteResult<StartVerificationResponse>
                         {
                             Status = HttpStatusCode.OK,
-                            Data = VerifyOwnershipResult.Verified
+                            Content = "foo"
                         });
 
 
-            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.START_VERIFICATION)).Returns(mockHttpRequest.Object);
+            mockHttpRequest.Setup(x => x.CreateRequest(ApiResource.Website.START_VERIFICATION))
+                           .Returns(mockHttpRequest.Object);
+
             mockHttpRequest.Setup(x => x.Execute()).Returns(mockExecuter.Object);
 
             var netsparkerClient = new NetsparkerRestClient(mockHttpRequest.Object);
@@ -238,8 +244,8 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var result = netsparkerClient.WebSite()
                                          .StartVerification(testModel);
 
-            VerifyOwnershipResult expected = VerifyOwnershipResult.NotVerified;
-            VerifyOwnershipResult actual = result.Data.VerifyOwnershipResult;
+            string expected = "foo";
+            string actual = result.Content;
 
             Assert.AreEqual(expected, actual);
         }
@@ -250,11 +256,11 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var mockHttpRequest = new Mock<IHttpRequest>();
 
             var mockExecuter = new Mock<IExecuter>();
-            mockExecuter.Setup(x => x.Get<VerifyOwnershipResult>())
-                        .Returns(new ExecuteResult<VerifyOwnershipResult>
+            mockExecuter.Setup(x => x.Get())
+                        .Returns(new ExecuteResult
                         {
                             Status = HttpStatusCode.OK,
-                            Data = VerifyOwnershipResult.Verified
+                            Content = "foo"
                         });
 
             mockHttpRequest.Setup(x => x.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, It.IsAny<object>()))
@@ -268,7 +274,7 @@ namespace MaestroPanel.NetsparkerClient.Tests
             var result = netsparkerClient.WebSite()
                                          .VerificationFile("http://foo.com");
 
-            Assert.AreNotEqual(string.Empty, result.Data);
+            Assert.AreNotEqual(string.Empty, result.Content);
         }
 
         [TestMethod]
