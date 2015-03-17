@@ -275,7 +275,9 @@ namespace MaestroPanel.NetsparkerClient.Model
     public enum ReportFormat
     {
         Xml,
-        Csv
+        Csv,
+        Pdf,
+        Html
     }
 
     public enum ContentFormat
