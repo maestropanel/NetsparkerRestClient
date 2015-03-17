@@ -269,7 +269,8 @@ namespace MaestroPanel.NetsparkerClient.Model
     {
         Crawled,
         Scanned,
-        Vulnerabilities
+        Vulnerabilities,
+        ScanDetail
     }
 
     public enum ReportFormat

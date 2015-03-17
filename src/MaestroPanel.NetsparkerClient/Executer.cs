@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using MaestroPanel.NetsparkerClient.ApiModels;
+using MaestroPanel.NetsparkerClient.ExceptionHandler;
+using MaestroPanel.NetsparkerClient.Response;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,10 +24,12 @@ namespace MaestroPanel.NetsparkerClient
     public class Executer : IExecuter
     {
         private readonly HttpWebRequest _request;
+        private readonly IResponseHandler _responseHandler;
 
-        public Executer(HttpWebRequest request)
+        public Executer(HttpWebRequest request, IResponseHandler responseHandler)
         {
             _request = request;
+            _responseHandler = responseHandler;
         }
 
         public ExecuteResult<T> Post<T>(object model)
@@ -51,51 +56,33 @@ namespace MaestroPanel.NetsparkerClient
                     requesStream.Write(requestData, 0, requestData.Length);
                 }
 
-                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
                 {
-                    var responseData = responseStream.GetResponseStream();
+                    var responseStream = response.GetResponseStream();
 
-                    if (responseData == null)
+                    if (responseStream == null)
                         return new ExecuteResult<T>
                         {
-                            Status = HttpStatusCode.OK
+                            Status = response.StatusCode
                         };
 
-                    string content = new StreamReader(responseData).ReadToEnd();
-
-                    var result = JsonConvert.DeserializeObject<T>(content);
+                    var responseData = _responseHandler.Handle<T>(responseStream);
 
                     return new ExecuteResult<T>
                     {
                         Status = HttpStatusCode.OK,
-                        Data = result,
-                        Content = content
+                        Data = responseData.Data,
+                        Content = responseData.Content
                     };
-                }
-            }
-            catch (WebException ex)
-            {
-                using (var errRes = (HttpWebResponse)ex.Response)
-                {
-                    using (var reader = new StreamReader(errRes.GetResponseStream()))
-                    {
-                        string error = reader.ReadToEnd();
-
-                        return new ExecuteResult<T>
-                        {
-                            Status = errRes.StatusCode,
-                            ErrorMessage = ex.Message,
-                            Content = error
-                        };
-                    }
                 }
             }
             catch (Exception ex)
             {
-                return new ExecuteResult<T>
-                {
-                    ErrorMessage = ex.Message
-                };
+                var exceptionHandlerFactory = new ExceptionHandlerFactory();
+
+                var exceptionHandler = exceptionHandlerFactory.Create(ex);
+
+                return exceptionHandler.Handle<T>(ex);
             }
         }
 
@@ -110,51 +97,34 @@ namespace MaestroPanel.NetsparkerClient
                 _request.Method = "GET";
                 _request.ContentType = "application/x-www-form-urlencoded";
 
-                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
                 {
-                    var responseData = responseStream.GetResponseStream();
+                    var responseStream = response.GetResponseStream();
 
-                    if (responseData == null)
+                    if (responseStream == null)
                         return new ExecuteResult<T>
                         {
-                            Status = HttpStatusCode.OK
+                            Status = response.StatusCode
                         };
 
-                    string content = new StreamReader(responseData).ReadToEnd();
 
-                    var result = JsonConvert.DeserializeObject<T>(content);
+                    var responseData = _responseHandler.Handle<T>(responseStream);
 
                     return new ExecuteResult<T>
                     {
-                        Data = result,
-                        Status = responseStream.StatusCode,
-                        Content = content
+                        Data = responseData.Data,
+                        Status = response.StatusCode,
+                        Content = responseData.Content
                     };
-                }
-            }
-            catch (WebException ex)
-            {
-                using (var errRes = (HttpWebResponse)ex.Response)
-                {
-                    using (var reader = new StreamReader(errRes.GetResponseStream()))
-                    {
-                        string error = reader.ReadToEnd();
-
-                        return new ExecuteResult<T>
-                        {
-                            Status = errRes.StatusCode,
-                            ErrorMessage = ex.Message,
-                            Content = error
-                        };
-                    }
                 }
             }
             catch (Exception ex)
             {
-                return new ExecuteResult<T>
-                {
-                    ErrorMessage = ex.Message
-                };
+                var exceptionHandlerFactory = new ExceptionHandlerFactory();
+
+                var exceptionHandler = exceptionHandlerFactory.Create(ex);
+
+                return exceptionHandler.Handle<T>(ex);
             }
         }
 
@@ -182,29 +152,33 @@ namespace MaestroPanel.NetsparkerClient
                     requesStream.Write(requestData, 0, requestData.Length);
                 }
 
-                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
                 {
-                    responseStream.GetResponseStream();
+                    var responseStream = response.GetResponseStream();
 
-                    return new ExecuteResult { Status = HttpStatusCode.OK };
+                    if (responseStream == null)
+                        return new ExecuteResult
+                        {
+                            Status = response.StatusCode
+                        };
+
+                    var responseData = _responseHandler.Handle(responseStream);
+
+                    return new ExecuteResult
+                    {
+                        Status = response.StatusCode,
+                        Data = responseData.Data,
+                        Content = responseData.Content
+                    };
                 }
-            }
-            catch (WebException ex)
-            {
-                var res = (HttpWebResponse)ex.Response;
-
-                return new ExecuteResult
-                {
-                    Status = res.StatusCode,
-                    ErrorMessage = ex.Message
-                };
             }
             catch (Exception ex)
             {
-                return new ExecuteResult
-                {
-                    ErrorMessage = ex.Message
-                };
+                var exceptionHandlerFactory = new ExceptionHandlerFactory();
+
+                var exceptionHandler = exceptionHandlerFactory.Create(ex);
+
+                return exceptionHandler.Handle(ex);
             }
         }
 
@@ -219,50 +193,34 @@ namespace MaestroPanel.NetsparkerClient
                 _request.Method = "GET";
                 _request.ContentType = "application/x-www-form-urlencoded";
 
-                using (HttpWebResponse responseStream = (HttpWebResponse)_request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)_request.GetResponse())
                 {
-                    var responseData = responseStream.GetResponseStream();
+                    var responseStream = response.GetResponseStream();
 
-                    if (responseData == null)
+                    if (responseStream == null)
                         return new ExecuteResult
                         {
-                            Status = HttpStatusCode.OK
+                            Status = response.StatusCode
                         };
 
-                    string content = new StreamReader(responseData).ReadToEnd();
+                    var responseData = _responseHandler.Handle(responseStream);
 
                     return new ExecuteResult
                     {
-                        Status = responseStream.StatusCode,
-                        Content = content
+                        Status = response.StatusCode,
+                        Content = responseData.Content,
+                        Data = responseData.Data
                     };
-                }
-            }
-            catch (WebException ex)
-            {
-                using (var errRes = (HttpWebResponse)ex.Response)
-                {
-                    using (var reader = new StreamReader(errRes.GetResponseStream()))
-                    {
-                        string error = reader.ReadToEnd();
-
-                        return new ExecuteResult
-                        {
-                            Status = errRes.StatusCode,
-                            ErrorMessage = ex.Message,
-                            Content = error
-                        };
-                    }
                 }
             }
             catch (Exception ex)
             {
-                return new ExecuteResult
-                {
-                    ErrorMessage = ex.Message
-                };
+                var exceptionHandlerFactory = new ExceptionHandlerFactory();
+
+                var exceptionHandler = exceptionHandlerFactory.Create(ex);
+
+                return exceptionHandler.Handle(ex);
             }
         }
     }
-
 }

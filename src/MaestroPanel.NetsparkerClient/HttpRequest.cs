@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MaestroPanel.NetsparkerClient.Response;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace MaestroPanel.NetsparkerClient
     public class HttpRequest : IHttpRequest
     {
         private HttpWebRequest _request;
+        private IResponseHandler _responseHandler;
 
         private string _accessToken;
         private string _baseUrl;
@@ -37,6 +39,8 @@ namespace MaestroPanel.NetsparkerClient
         public HttpRequest(string baseUrl)
         {
             _baseUrl = baseUrl;
+
+            _responseHandler = new JsonResponseHandler();
         }
 
         public IHttpRequest CreateRequest(string path)
@@ -67,6 +71,34 @@ namespace MaestroPanel.NetsparkerClient
             return this;
         }
 
+        public IHttpRequest XmlResponseHandler()
+        {
+            _responseHandler = new XmlResponseHandler();
+
+            return this;
+        }
+
+        public IHttpRequest JsonResponseHandler()
+        {
+            _responseHandler = new JsonResponseHandler();
+
+            return this;
+        }
+
+        public IHttpRequest ByteArrayResponseHandler()
+        {
+            _responseHandler = new ByteArrayResponseHandler();
+
+            return this;
+        }
+
+        public IHttpRequest EmptyResponseHandler()
+        {
+            _responseHandler = new EmptyResponseHandler();
+
+            return this;
+        }
+
         public IExecuter Execute()
         {
             _request = _request = (HttpWebRequest)HttpWebRequest.Create(_url);
@@ -76,7 +108,7 @@ namespace MaestroPanel.NetsparkerClient
                 _request.Headers["Authorization"] = "Basic " + _accessToken;
             }
 
-            return new Executer(_request);
+            return new Executer(_request, _responseHandler);
         }
 
         public string Url

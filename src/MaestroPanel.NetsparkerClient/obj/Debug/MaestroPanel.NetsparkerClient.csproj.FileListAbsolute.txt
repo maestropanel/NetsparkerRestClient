@@ -26,3 +26,4 @@ O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\New
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.xml
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.dll
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.pdb
+O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.csprojResolveAssemblyReference.cache

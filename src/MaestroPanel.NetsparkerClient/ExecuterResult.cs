@@ -17,5 +17,6 @@ namespace MaestroPanel.NetsparkerClient
         public HttpStatusCode Status { get; set; }
         public string ErrorMessage { get; set; }
         public string Content { get; set; }
+        public object Data { get; set; }
     }
 }
