@@ -27,3 +27,10 @@ O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\New
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.dll
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.pdb
 O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.csprojResolveAssemblyReference.cache
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\MaestroPanel.NetsparkerClient.dll
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\MaestroPanel.NetsparkerClient.pdb
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.pdb
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.dll
+C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.pdb

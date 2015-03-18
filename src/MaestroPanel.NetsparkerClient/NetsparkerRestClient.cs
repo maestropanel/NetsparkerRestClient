@@ -257,6 +257,7 @@ namespace MaestroPanel.NetsparkerClient
                                                                     Format = format,
                                                                     ContentFormat = contentFormat
                                                                 })
+                                                                .ByteArrayResponseHandler()
                                                                 .Execute()
                                                                 .Get();
         }

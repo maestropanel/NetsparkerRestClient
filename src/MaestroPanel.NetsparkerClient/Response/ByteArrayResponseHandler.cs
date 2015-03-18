@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace MaestroPanel.NetsparkerClient.Response
@@ -13,34 +14,19 @@ namespace MaestroPanel.NetsparkerClient.Response
     {
         public ResponseData<T> Handle<T>(Stream responseStream)
         {
-            var memStream = new MemoryStream();
-
-            responseStream.CopyTo(memStream);
-
-            var obj = memStream.ToArray();
-
-            GCHandle handle = GCHandle.Alloc(obj, GCHandleType.Pinned);
-
-            T structure = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
-
-            handle.Free();
-
-            var content = Encoding.UTF8.GetString(obj);
-
-            return new ResponseData<T>
-            {
-                Content = content,
-                Data = structure
+            return new ResponseData<T> 
+            { 
+                 
             };
         }
 
         public ResponseData Handle(Stream responseStream)
         {
-            var memStream = new MemoryStream();
+            var memoryStream = new MemoryStream();
 
-            responseStream.CopyTo(memStream);
+            responseStream.CopyTo(memoryStream);
 
-            var obj = memStream.ToArray();
+            var obj = memoryStream.ToArray();
 
             var content = Encoding.UTF8.GetString(obj);
 

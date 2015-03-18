@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5D039592
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaestroPanel.NetsparkerClient.Examples", "..\examples\MaestroPanel.NetsparkerClient.Examples\MaestroPanel.NetsparkerClient.Examples.csproj", "{8FE1B0BF-10D0-4864-9286-C96B29E5872E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaestroPanel.ResponseHandler.Tests", "MaestroPanel.ResponseHandler.Tests\MaestroPanel.ResponseHandler.Tests.csproj", "{84987E08-90A0-43EA-AA6D-51C64A6C4C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{8FE1B0BF-10D0-4864-9286-C96B29E5872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FE1B0BF-10D0-4864-9286-C96B29E5872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FE1B0BF-10D0-4864-9286-C96B29E5872E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84987E08-90A0-43EA-AA6D-51C64A6C4C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84987E08-90A0-43EA-AA6D-51C64A6C4C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84987E08-90A0-43EA-AA6D-51C64A6C4C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84987E08-90A0-43EA-AA6D-51C64A6C4C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +55,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{65D5728A-EA11-4560-8BCA-67B0FC37C852} = {5D039592-4D6E-4C5D-9CA4-03C785CFE927}
 		{EE6EA7BB-2928-404F-8B98-276CE76A1A7E} = {5D039592-4D6E-4C5D-9CA4-03C785CFE927}
+		{84987E08-90A0-43EA-AA6D-51C64A6C4C3B} = {5D039592-4D6E-4C5D-9CA4-03C785CFE927}
 	EndGlobalSection
 EndGlobal

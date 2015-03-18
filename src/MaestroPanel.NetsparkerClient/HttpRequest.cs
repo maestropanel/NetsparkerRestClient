@@ -22,6 +22,11 @@ namespace MaestroPanel.NetsparkerClient
         IHttpRequest CreateRequestWithQueryString(string path, object parameters);
         IHttpRequest CreateRequestWithQueryString(string path, IDictionary<string, string> parameters);
 
+        IHttpRequest XmlResponseHandler();
+        IHttpRequest JsonResponseHandler();
+        IHttpRequest ByteArrayResponseHandler();
+        IHttpRequest EmptyResponseHandler();
+
         IHttpRequest Authenticate(string accessToken);
 
         IExecuter Execute();
