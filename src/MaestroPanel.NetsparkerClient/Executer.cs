@@ -41,8 +41,6 @@ namespace MaestroPanel.NetsparkerClient
 
             try
             {
-                ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
                 _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
                 _request.ReadWriteTimeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
                 _request.Method = "POST";
@@ -88,8 +86,6 @@ namespace MaestroPanel.NetsparkerClient
 
         public ExecuteResult<T> Get<T>()
         {
-            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
             try
             {
                 _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
@@ -137,8 +133,6 @@ namespace MaestroPanel.NetsparkerClient
 
             try
             {
-                ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
                 _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
                 _request.ReadWriteTimeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
                 _request.Method = "POST";
@@ -184,8 +178,6 @@ namespace MaestroPanel.NetsparkerClient
 
         public ExecuteResult Get()
         {
-            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
             try
             {
                 _request.Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
