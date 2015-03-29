@@ -101,6 +101,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult VerificationFile(string websiteUrl)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Website.VERIFICATION_FILE, new { webSiteUrl = websiteUrl })
+                              .EmptyResponseHandler()
                               .Execute()
                               .Get();
         }
