@@ -24,7 +24,7 @@ namespace MaestroPanel.NetsparkerClient
     public class Executer : IExecuter
     {
         private readonly HttpWebRequest _request;
-        private readonly IResponseHandler _responseHandler;
+        private IResponseHandler _responseHandler;
 
         public Executer(HttpWebRequest request, IResponseHandler responseHandler)
         {
@@ -63,6 +63,8 @@ namespace MaestroPanel.NetsparkerClient
                         {
                             Status = response.StatusCode
                         };
+
+                    _responseHandler = _responseHandler ?? new JsonResponseHandler();
 
                     var responseData = _responseHandler.Handle<T>(responseStream);
 

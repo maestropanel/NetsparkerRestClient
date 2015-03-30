@@ -44,8 +44,6 @@ namespace MaestroPanel.NetsparkerClient
         public HttpRequest(string baseUrl)
         {
             _baseUrl = baseUrl;
-
-            _responseHandler = new JsonResponseHandler();
         }
 
         public IHttpRequest CreateRequest(string path)
