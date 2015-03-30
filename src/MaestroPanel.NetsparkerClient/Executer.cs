@@ -64,8 +64,6 @@ namespace MaestroPanel.NetsparkerClient
                             Status = response.StatusCode
                         };
 
-                    _responseHandler = _responseHandler ?? new JsonResponseHandler();
-
                     var responseData = _responseHandler.Handle<T>(responseStream);
 
                     return new ExecuteResult<T>

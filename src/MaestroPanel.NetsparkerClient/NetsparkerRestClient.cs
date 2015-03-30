@@ -59,6 +59,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<PagedListApiResult<WebsiteApiModel>> List(int page = 1, int pageSize = 20)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Website.LIST, new { page = page, pageSize = pageSize })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<PagedListApiResult<WebsiteApiModel>>();
         }
@@ -66,6 +67,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<WebsiteApiModel> New(NewWebsiteApiModel webSite)
         {
             return _webRequest.CreateRequest(ApiResource.Website.NEW)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<WebsiteApiModel>(webSite);
         }
@@ -73,6 +75,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<WebsiteApiModel> Update(UpdateWebsiteApiModel webSite)
         {
             return _webRequest.CreateRequest(ApiResource.Website.UPDATE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<WebsiteApiModel>(webSite);
         }
@@ -80,6 +83,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<DeleteWebsiteResult> Delete(DeleteWebsiteApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Website.DELETE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<DeleteWebsiteResult>(model);
         }
@@ -87,6 +91,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<VerifyOwnershipResult> Verify(VerifyApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Website.VERIFY)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<VerifyOwnershipResult>(model);
         }
@@ -94,6 +99,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<StartVerificationResponse> StartVerification(StartVerificationApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Website.START_VERIFICATION)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<StartVerificationResponse>(model);
         }
@@ -109,6 +115,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<VerifyOwnershipResult> WebSiteSendVerificationEmail(string websiteUrl)
         {
             return _webRequest.CreateRequest(ApiResource.Website.SEND_VERIFICATION_EMAIL)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<VerifyOwnershipResult>(websiteUrl);
         }
@@ -126,6 +133,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<PagedListApiResult<WebsiteGroupApiModel>> List(int page = 1, int pageSize = 20)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.WebsiteGroup.LIST, new { page = page, pageSize = pageSize })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<PagedListApiResult<WebsiteGroupApiModel>>();
         }
@@ -133,6 +141,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<WebsiteGroupApiModel> New(NewWebsiteGroupApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.WebsiteGroup.NEW)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<WebsiteGroupApiModel>(model);
         }
@@ -140,6 +149,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<WebsiteApiModel> Update(WebsiteGroupApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.WebsiteGroup.UPDATE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<WebsiteApiModel>(model);
         }
@@ -147,6 +157,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult Delete(DeleteWebsiteGroupApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.WebsiteGroup.DELETE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post(model);
         }
@@ -164,6 +175,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<List<ScanTaskModel>> New(NewScanTaskApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.NEW)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<List<ScanTaskModel>>(model);
         }
@@ -171,6 +183,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult Cancel(Guid scanid)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.CANCEL)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post(scanid);
         }
@@ -178,6 +191,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanTaskModel> Retest(BaseScanApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.RETEST)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<ScanTaskModel>(model);
         }
@@ -185,14 +199,15 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanTaskModel> Incremental(BaseScanApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.INCREMENTAL)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<ScanTaskModel>(model);
         }
 
-        //ToDo : Response bilgisi yok
         public ExecuteResult Delete(List<Guid> scanids)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.DELETE)
+                              .EmptyResponseHandler()
                               .Execute()
                               .Post(scanids);
         }
@@ -200,6 +215,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ApiScanStatusModel> Status(Guid id)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.STATUS, new { id = id })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<ApiScanStatusModel>();
         }
@@ -207,6 +223,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<List<VulnerabilityModel>> Result(Guid id)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.RESULT, new { id = id })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<List<VulnerabilityModel>>();
         }
@@ -214,6 +231,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<PagedListApiResult<ScanTaskModel>> List(int page = 1, int pageSize = 20)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.LIST, new { page = page, pageSize = pageSize })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<PagedListApiResult<ScanTaskModel>>();
         }
@@ -221,6 +239,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<UpdateScheduledScanModel> Schedule(NewScheduledScanApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.SCHEDULE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<UpdateScheduledScanModel>(model);
         }
@@ -228,6 +247,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult Unschedule(Guid id)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.UNSCHEDULE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post(id);
         }
@@ -235,6 +255,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<UpdateScheduledScanApiModel> UpdateSchedule(UpdateScheduledScanApiModel model)
         {
             return _webRequest.CreateRequest(ApiResource.Scans.UPDATE_SCHEDULED)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<UpdateScheduledScanApiModel>(model);
         }
@@ -243,6 +264,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<PagedListApiResult<UpdateScheduledScanModel>> ListScheduled(int page = 1, int pageSize = 20)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.Scans.LIST_SCHEDULED, new { page = page, pageSize = pageSize })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<PagedListApiResult<UpdateScheduledScanModel>>();
         }
@@ -276,6 +298,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<PagedListApiResult<ScanPolicySettingItemModel>> List(int page = 1, int pageSize = 20)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.LIST, new { page = page, pageSize = pageSize })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<PagedListApiResult<ScanPolicySettingItemModel>>();
         }
@@ -283,6 +306,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanPolicySettingApiModel> New(NewScanPolicySettingModel model)
         {
             return _webRequest.CreateRequest(ApiResource.ScanPolicy.NEW)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<ScanPolicySettingApiModel>(model);
         }
@@ -290,6 +314,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanPolicyDeleteResult> Delete(string policyName)
         {
             return _webRequest.CreateRequest(ApiResource.ScanPolicy.DELETE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<ScanPolicyDeleteResult>(policyName);
         }
@@ -297,6 +322,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanPolicySettingApiModel> Update(UpdateScanPolicySettingModel model)
         {
             return _webRequest.CreateRequest(ApiResource.ScanPolicy.UPDATE)
+                              .JsonResponseHandler()
                               .Execute()
                               .Post<ScanPolicySettingApiModel>(model);
         }
@@ -304,6 +330,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanPolicySettingApiModel> Get(string name)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.GET, new { name = name })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<ScanPolicySettingApiModel>();
         }
@@ -311,6 +338,7 @@ namespace MaestroPanel.NetsparkerClient
         public ExecuteResult<ScanPolicySettingApiModel> Get(Guid id)
         {
             return _webRequest.CreateRequestWithQueryString(ApiResource.ScanPolicy.GET, new { id = id })
+                              .JsonResponseHandler()
                               .Execute()
                               .Get<ScanPolicySettingApiModel>();
         }
