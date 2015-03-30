@@ -145,6 +145,7 @@ namespace MaestroPanel.NetsparkerClient.Model
         public ScanTaskState State { get; set; }
         public int EstimatedSteps { get; set; }
         public int CompletedSteps { get; set; }
+        public int EstimatedLaunchTime { get; set; }
     }
 
     public class VulnerabilityModel
