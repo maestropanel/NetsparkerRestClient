@@ -111,6 +111,11 @@ namespace MaestroPanel.NetsparkerClient
                 _request.Headers["Authorization"] = "Basic " + _accessToken;
             }
 
+            if (_responseHandler == null) 
+            {
+                throw new Exception("ResponseHandler can not be null");
+            }
+
             return new Executer(_request, _responseHandler);
         }
 
