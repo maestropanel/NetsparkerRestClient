@@ -44,8 +44,6 @@ namespace MaestroPanel.NetsparkerClient
         public HttpRequest(string baseUrl)
         {
             _baseUrl = baseUrl;
-
-            _responseHandler = new JsonResponseHandler();
         }
 
         public IHttpRequest CreateRequest(string path)
@@ -111,6 +109,11 @@ namespace MaestroPanel.NetsparkerClient
             if (!string.IsNullOrWhiteSpace(_accessToken))
             {
                 _request.Headers["Authorization"] = "Basic " + _accessToken;
+            }
+
+            if (_responseHandler == null) 
+            {
+                throw new Exception("ResponseHandler can not be null");
             }
 
             return new Executer(_request, _responseHandler);
