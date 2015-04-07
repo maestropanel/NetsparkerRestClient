@@ -23,6 +23,16 @@ namespace MaestroPanel.NetsparkerClient.ExceptionHandler
 
             using (var errRes = (HttpWebResponse)webEx.Response)
             {
+                if (errRes == null)
+                {
+                    return new ExecuteResult
+                    {
+                        Content = webEx.Message,
+                        ErrorMessage = webEx.Message,
+                        Status = HttpStatusCode.InternalServerError
+                    };
+                }
+
                 using (var reader = new StreamReader(errRes.GetResponseStream()))
                 {
                     string error = reader.ReadToEnd();
@@ -56,6 +66,16 @@ namespace MaestroPanel.NetsparkerClient.ExceptionHandler
 
             using (var errRes = (HttpWebResponse)webEx.Response)
             {
+                if (errRes == null)
+                {
+                    return new ExecuteResult<T>
+                    {
+                        Content = webEx.Message,
+                        ErrorMessage = webEx.Message,
+                        Status = HttpStatusCode.InternalServerError
+                    };
+                }
+
                 using (var reader = new StreamReader(errRes.GetResponseStream()))
                 {
                     string error = reader.ReadToEnd();
