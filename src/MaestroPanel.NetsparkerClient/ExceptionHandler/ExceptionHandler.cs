@@ -27,12 +27,24 @@ namespace MaestroPanel.NetsparkerClient.ExceptionHandler
                 {
                     string error = reader.ReadToEnd();
 
-                    return new ExecuteResult
+                    try
                     {
-                        Status = errRes.StatusCode,
-                        ErrorMessage = JsonConvert.DeserializeObject<ErrorModel>(ex.Message).Message,
-                        Content = error
-                    };
+                        return new ExecuteResult
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = JsonConvert.DeserializeObject<ErrorModel>(ex.Message).Message,
+                            Content = error
+                        };
+                    }
+                    catch
+                    {
+                        return new ExecuteResult
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = error,
+                            Content = error
+                        };
+                    }
                 }
             }
         }
@@ -48,12 +60,24 @@ namespace MaestroPanel.NetsparkerClient.ExceptionHandler
                 {
                     string error = reader.ReadToEnd();
 
-                    return new ExecuteResult<T>
+                    try
                     {
-                        Status = errRes.StatusCode,
-                        ErrorMessage = JsonConvert.DeserializeObject<ErrorModel>(error).Message,
-                        Content = error
-                    };
+                        return new ExecuteResult<T>
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = JsonConvert.DeserializeObject<ErrorModel>(error).Message,
+                            Content = error
+                        };
+                    }
+                    catch
+                    {
+                        return new ExecuteResult<T>
+                        {
+                            Status = errRes.StatusCode,
+                            ErrorMessage = error,
+                            Content = error
+                        };
+                    }
                 }
             }
         }
