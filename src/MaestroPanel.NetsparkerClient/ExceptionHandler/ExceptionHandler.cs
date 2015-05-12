@@ -85,7 +85,7 @@ namespace MaestroPanel.NetsparkerClient.ExceptionHandler
                         return new ExecuteResult<T>
                         {
                             Status = errRes.StatusCode,
-                            ErrorMessage = JsonConvert.DeserializeObject<ErrorModel>(error).Message,
+                            ErrorMessage = String.IsNullOrEmpty(error) ? ex.Message : JsonConvert.DeserializeObject<ErrorModel>(error).Message,
                             Content = error
                         };
                     }

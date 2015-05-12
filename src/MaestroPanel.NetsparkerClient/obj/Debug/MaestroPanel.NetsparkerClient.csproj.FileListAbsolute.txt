@@ -34,3 +34,4 @@ C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\bin\
 C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.dll
 C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.pdb
 C:\Projects\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.csprojResolveAssemblyReference.cache
+O:\Projects\NetsparkerRestClient\src\MaestroPanel.NetsparkerClient\obj\Debug\MaestroPanel.NetsparkerClient.csprojResolveAssemblyReference.cache
